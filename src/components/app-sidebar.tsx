@@ -14,53 +14,46 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { currentUser } from "@/data/seed"
 import {
-  LayoutDashboardIcon,
-  WalletIcon,
-  ArrowLeftRightIcon,
-  CreditCardIcon,
-  ChartAreaIcon,
   TargetIcon,
+  GitCompareArrowsIcon,
+  TrophyIcon,
+  UsersIcon,
+  UserRoundCogIcon,
+  PieChartIcon,
+  TrendingUpIcon,
+  ClipboardCheckIcon,
+  BellIcon,
   SettingsIcon,
   LifeBuoyIcon,
-  LandmarkIcon,
-  SendIcon,
-  TrendingUpIcon,
-  BitcoinIcon,
-  BellIcon,
-  LogInIcon,
-  UserPlusIcon,
+  Building2Icon,
 } from "lucide-react"
 
+const soon = (slug: string) => `/coming-soon?from=${slug}`
+
 const data = {
-  user: {
-    name: "Abderrahim G.",
-    email: "abderrahim@fintech.com",
-    avatar: "/avatars/user.jpg",
-  },
-  navDaily: [
-    { title: "Overview", url: "/dashboard", icon: <LayoutDashboardIcon /> },
-    { title: "Accounts", url: "/accounts", icon: <WalletIcon /> },
-    { title: "Transactions", url: "/transactions", icon: <ArrowLeftRightIcon /> },
-    { title: "Cards", url: "/cards", icon: <CreditCardIcon /> },
+  user: currentUser,
+  navMain: [
+    { title: "So sánh các năm", url: soon("so-sanh-nam"), icon: <GitCompareArrowsIcon /> },
   ],
-  navMoney: [
-    { title: "Transfers", url: "/transfers", icon: <SendIcon /> },
-    { title: "Investments", url: "/investments", icon: <TrendingUpIcon /> },
-    { title: "Crypto", url: "/crypto", icon: <BitcoinIcon /> },
+  navSoon: [
+    { title: "Chỉ tiêu công ty", url: soon("chi-tieu"), icon: <TargetIcon /> },
+    { title: "Xếp hạng chi nhánh", url: soon("xep-hang"), icon: <TrophyIcon /> },
   ],
-  navInsights: [
-    { title: "Analytics", url: "/analytics", icon: <ChartAreaIcon /> },
-    { title: "Budgets", url: "/budgets", icon: <TargetIcon /> },
+  navManage: [
+    { title: "Giám đốc vùng", url: soon("giam-doc"), icon: <UserRoundCogIcon /> },
+    { title: "Đội bán hàng", url: soon("doi-ban"), icon: <UsersIcon /> },
+    { title: "Phân bổ chỉ tiêu", url: soon("phan-bo"), icon: <PieChartIcon /> },
   ],
-  navAuth: [
-    { title: "Sign In", url: "/sign-in", icon: <LogInIcon /> },
-    { title: "Sign Up", url: "/sign-up", icon: <UserPlusIcon /> },
+  navAnalysis: [
+    { title: "Phân tích YoY", url: soon("yoy"), icon: <TrendingUpIcon /> },
+    { title: "Kiểm toán ngân sách", url: soon("kiem-toan"), icon: <ClipboardCheckIcon /> },
   ],
   navSecondary: [
-    { title: "Notifications", url: "/notifications", icon: <BellIcon /> },
-    { title: "Settings", url: "/settings", icon: <SettingsIcon /> },
-    { title: "Help & Support", url: "/support", icon: <LifeBuoyIcon /> },
+    { title: "Thông báo", url: soon("thong-bao"), icon: <BellIcon /> },
+    { title: "Cài đặt", url: soon("cai-dat"), icon: <SettingsIcon /> },
+    { title: "Hỗ trợ", url: soon("ho-tro"), icon: <LifeBuoyIcon /> },
   ],
 }
 
@@ -70,14 +63,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" render={<Link href="/dashboard" />}>
+            <SidebarMenuButton size="lg" render={<Link href="/coming-soon" />}>
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <LandmarkIcon className="size-4" />
+                <Building2Icon className="size-4" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Shadcn Fintech</span>
-                <span className="truncate text-xs text-muted-foreground">
-                  Finance Dashboard
+                <span className="truncate font-semibold">Bateco</span>
+                <span className="truncate text-xs text-sidebar-foreground/65">
+                  Revenue BI
                 </span>
               </div>
             </SidebarMenuButton>
@@ -85,10 +78,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navDaily} label="Daily" />
-        <NavMain items={data.navMoney} label="Money" />
-        <NavMain items={data.navInsights} label="Insights" />
-        <NavMain items={data.navAuth} label="Auth" />
+        <NavMain items={data.navMain} label="CHÍNH" />
+        <NavMain items={data.navSoon} label="CÁC MỤC KHÁC" />
+        <NavMain items={data.navManage} label="QUẢN LÝ" />
+        <NavMain items={data.navAnalysis} label="PHÂN TÍCH" />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

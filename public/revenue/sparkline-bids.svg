@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="207" height="44" viewBox="0 0 207 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Sparkline">
+<path id="Vector" d="M4 30.4C10 28.1 16.1 23.5 22.1 23.5C28.1 23.5 34.2 27.4 40.2 27.4C46.2 27.4 52.2 27.4 58.3 27.4C64.3 27.4 70.3 22.4 76.4 22.4C82.4 22.4 88.4 27.4 94.5 27.4C100.5 27.4 106.5 22.4 112.5 22.4C118.6 22.4 124.6 22.4 130.6 22.4C136.7 22.4 142.7 27.4 148.7 27.4C154.8 27.4 160.8 18.4 166.8 18.4C172.8 18.4 178.9 18.4 184.9 18.4C190.9 18.4 197 12.4 203 9.4V44H4V30.4Z" fill="url(#paint0_linear_0_50)"/>
+<path id="Vector_2" d="M4 30.4C10 28.1 16.1 23.5 22.1 23.5C28.1 23.5 34.2 27.4 40.2 27.4H58.3C64.3 27.4 70.3 22.4 76.4 22.4C82.4 22.4 88.4 27.4 94.5 27.4C100.5 27.4 106.5 22.4 112.5 22.4H130.6C136.7 22.4 142.7 27.4 148.7 27.4C154.8 27.4 160.8 18.4 166.8 18.4H184.9C190.9 18.4 197 12.4 203 9.4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#38A5E0"/>
+<path id="Vector_3" d="M203 12.4C204.657 12.4 206 11.0569 206 9.4C206 7.74315 204.657 6.4 203 6.4C201.343 6.4 200 7.74315 200 9.4C200 11.0569 201.343 12.4 203 12.4Z" fill="white" stroke-width="2" stroke="#38A5E0"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_50" x1="4" y1="9.4" x2="4" y2="44" gradientUnits="userSpaceOnUse">
+<stop stop-color="#38A5E0" stop-opacity="0.16"/>
+<stop offset="1" stop-color="#38A5E0" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="207" height="44" viewBox="0 0 207 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Sparkline" clip-path="url(#clip0_0_78)">
+<path id="Vector" d="M4 30.4C10 29.6 16.1 29 22.1 28C28.1 27 34.2 25.4 40.2 24.4C46.2 23.4 52.2 22.8 58.3 22C64.3 21.2 70.3 20.2 76.4 19.6C82.4 19 88.4 18.8 94.5 18.4C100.5 18 106.5 17.6 112.5 17.2C118.6 16.8 124.6 16.4 130.6 16C136.7 15.6 142.7 15.4 148.7 14.8C154.8 14.2 160.8 13.4 166.8 12.4C172.8 11.4 178.9 8.8 184.9 8.8C190.9 8.8 197 13.6 203 16V44H4V30.4Z" fill="url(#paint0_linear_0_78)"/>
+<path id="Vector_2" d="M4 30.4C10 29.6 16.1 29 22.1 28C28.1 27 34.2 25.4 40.2 24.4C46.2 23.4 52.2 22.8 58.3 22C64.3 21.2 70.3 20.2 76.4 19.6C82.4 19 88.4 18.8 94.5 18.4L112.5 17.2C118.6 16.8 124.599 16.4001 130.599 16.0001L130.6 16C136.7 15.6 142.7 15.4 148.7 14.8C154.8 14.2 160.8 13.4 166.8 12.4C172.8 11.4 178.9 8.8 184.9 8.8C190.9 8.8 197 13.6 203 16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#38A5E0"/>
+<path id="Vector_3" d="M203 19C204.657 19 206 17.6569 206 16C206 14.3431 204.657 13 203 13C201.343 13 200 14.3431 200 16C200 17.6569 201.343 19 203 19Z" fill="white" stroke-width="2" stroke="#38A5E0"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_78" x1="4" y1="8.8" x2="4" y2="44" gradientUnits="userSpaceOnUse">
+<stop stop-color="#38A5E0" stop-opacity="0.16"/>
+<stop offset="1" stop-color="#38A5E0" stop-opacity="0"/>
+</linearGradient>
+<clipPath id="clip0_0_78">
+<rect width="207" height="44" fill="white"/>
+</clipPath>
+</defs>
+</svg>

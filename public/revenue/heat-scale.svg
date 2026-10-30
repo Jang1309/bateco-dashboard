@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="120" height="8" viewBox="0 0 120 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Scale bar" clip-path="url(#clip0_0_77)">
+<path id="Vector" d="M116 0H4C1.79086 0 0 1.79086 0 4C0 6.20914 1.79086 8 4 8H116C118.209 8 120 6.20914 120 4C120 1.79086 118.209 0 116 0Z" fill="url(#paint0_linear_0_77)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_77" x1="0" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E0F1F8"/>
+<stop offset="0.5" stop-color="#38A5E0"/>
+<stop offset="1" stop-color="#162E4D"/>
+</linearGradient>
+<clipPath id="clip0_0_77">
+<rect width="120" height="8" fill="white"/>
+</clipPath>
+</defs>
+</svg>
