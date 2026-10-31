@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import type { TableMessages } from "@querycn/table-react"
-import { Loader2Icon, PencilIcon, PlusIcon } from "lucide-react"
+import * as React from "react";
+import type { TableMessages } from "@querycn/table-react";
+import { Loader2Icon, PencilIcon, PlusIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -14,16 +14,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import type { BulkEditState } from "@/components/data-table/use-bulk-edit"
-import type { CellEditors } from "@/components/data-table/data-table-cell-editors"
-import { DataTableBulkEditField } from "@/components/data-table/data-table-bulk-edit-field"
+} from "@/components/ui/dialog";
+import type { BulkEditState } from "@/components/data-table/use-bulk-edit";
+import type { CellEditors } from "@/components/data-table/data-table-cell-editors";
+import { DataTableBulkEditField } from "@/components/data-table/data-table-bulk-edit-field";
 
 export interface DataTableBulkEditDialogProps<TData extends object> {
   /** From `useBulkEdit`. */
-  bulk: BulkEditState<TData>
-  editors: CellEditors
-  messages: TableMessages
+  bulk: BulkEditState<TData>;
+  editors: CellEditors;
+  messages: TableMessages;
 }
 
 /**
@@ -35,15 +35,15 @@ export function DataTableBulkEditDialog<TData extends object>({
   editors,
   messages,
 }: DataTableBulkEditDialogProps<TData>) {
-  const lastPicker = React.useRef<HTMLButtonElement>(null)
-  const focusLast = React.useRef(false)
-  const fieldCount = bulk.fields.length
+  const lastPicker = React.useRef<HTMLButtonElement>(null);
+  const focusLast = React.useRef(false);
+  const fieldCount = bulk.fields.length;
 
   React.useEffect(() => {
-    if (!focusLast.current) return
-    focusLast.current = false
-    lastPicker.current?.focus()
-  }, [fieldCount])
+    if (!focusLast.current) return;
+    focusLast.current = false;
+    lastPicker.current?.focus();
+  }, [fieldCount]);
 
   return (
     <Dialog open={bulk.open} onOpenChange={bulk.onOpenChange}>
@@ -76,8 +76,8 @@ export function DataTableBulkEditDialog<TData extends object>({
           className="justify-self-start"
           disabled={bulk.pending || fieldCount >= bulk.columns.length}
           onClick={() => {
-            focusLast.current = true
-            bulk.addField()
+            focusLast.current = true;
+            bulk.addField();
           }}
         >
           <PlusIcon />
@@ -108,5 +108,5 @@ export function DataTableBulkEditDialog<TData extends object>({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

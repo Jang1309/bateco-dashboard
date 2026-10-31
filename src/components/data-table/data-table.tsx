@@ -1,57 +1,57 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useAppliedFilter } from "@querycn/filter-react"
+import * as React from "react";
+import { useAppliedFilter } from "@querycn/filter-react";
 import {
   enTableMessages,
   type DataTableInstance,
   type TableMessages,
-} from "@querycn/table-react"
+} from "@querycn/table-react";
 
-import { cn } from "cn"
-import { TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { cn } from "cn";
+import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import {
   headerCellClassName,
   pinnedCellClassName,
-} from "@/components/data-table/data-table-cell-classes"
+} from "@/components/data-table/data-table-cell-classes";
 import {
   getHeaderCellProps,
   getPinnedEdges,
-} from "@/components/data-table/data-table-pinning"
+} from "@/components/data-table/data-table-pinning";
 import {
   canReorderColumns,
   ColumnReorder,
-} from "@/components/data-table/column-reorder"
-import { useTableContainer } from "@/components/data-table/column-layout-actions"
-import { useScrollEdges } from "@/components/data-table/use-scroll-edges"
-import { useScrollToTopOnChange } from "@/components/data-table/use-scroll-to-top-on-change"
-import { useVirtualRows } from "@/components/data-table/use-virtual-rows"
-import { DataTableCards } from "@/components/data-table/data-table-cards"
+} from "@/components/data-table/column-reorder";
+import { useTableContainer } from "@/components/data-table/column-layout-actions";
+import { useScrollEdges } from "@/components/data-table/use-scroll-edges";
+import { useScrollToTopOnChange } from "@/components/data-table/use-scroll-to-top-on-change";
+import { useVirtualRows } from "@/components/data-table/use-virtual-rows";
+import { DataTableCards } from "@/components/data-table/data-table-cards";
 import {
   DataTableFillerHead,
   getFillerIndex,
   withFiller,
-} from "@/components/data-table/data-table-filler"
+} from "@/components/data-table/data-table-filler";
 import {
   DataTableBody,
   type DataTableBodyOptions,
-} from "@/components/data-table/data-table-body"
-import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header"
+} from "@/components/data-table/data-table-body";
+import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 
 export interface DataTableProps<TData extends object>
   extends
     Omit<React.ComponentProps<"div">, "children">,
     DataTableBodyOptions<TData> {
-  table: DataTableInstance<TData>
-  messages?: TableMessages
+  table: DataTableInstance<TData>;
+  messages?: TableMessages;
   /**
    * Renders only the rows in view, for long pages (thousands of rows). Needs
    * a height on the table, e.g. `className="h-[600px]"`. Fitting a column to
    * its content then measures the rendered rows only.
    */
-  virtualize?: boolean
+  virtualize?: boolean;
   /** A row's height before it's measured, in pixels. */
-  estimateRowHeight?: number
+  estimateRowHeight?: number;
 }
 
 /**
@@ -79,32 +79,32 @@ export function DataTable<TData extends object>({
   className,
   ...props
 }: DataTableProps<TData>) {
-  const [scrollRef, scrolled] = useScrollEdges<HTMLDivElement>()
-  useTableContainer(table, scrollRef)
+  const [scrollRef, scrolled] = useScrollEdges<HTMLDivElement>();
+  useTableContainer(table, scrollRef);
   const columns = [
     ...table.getStartVisibleLeafColumns(),
     ...table.getCenterVisibleLeafColumns(),
     ...table.getEndVisibleLeafColumns(),
-  ]
-  const edges = getPinnedEdges(table)
-  const headerGroups = table.getHeaderGroups()
-  const canReorder = canReorderColumns(table)
-  const rows = table.getRowModel().rows
-  const rowCount = rows.length
-  const { sorting, pagination } = table.store.state
-  const { queryKey } = useAppliedFilter()
+  ];
+  const edges = getPinnedEdges(table);
+  const headerGroups = table.getHeaderGroups();
+  const canReorder = canReorderColumns(table);
+  const rows = table.getRowModel().rows;
+  const rowCount = rows.length;
+  const { sorting, pagination } = table.store.state;
+  const { queryKey } = useAppliedFilter();
   useScrollToTopOnChange(
     scrollRef,
-    JSON.stringify([sorting, pagination, queryKey, table.options.meta?.search])
-  )
+    JSON.stringify([sorting, pagination, queryKey, table.options.meta?.search]),
+  );
   const virtual = useVirtualRows({
     enabled: virtualize && !isError,
     count: rowCount,
     getRowId: React.useCallback((index: number) => rows[index]!.id, [rows]),
     scrollRef,
     estimateRowHeight,
-  })
-  const cards = !virtualize && !isError && rowCount > 0
+  });
+  const cards = !virtualize && !isError && rowCount > 0;
 
   return (
     <div
@@ -117,7 +117,7 @@ export function DataTable<TData extends object>({
         // Tay nắm resize lệch ra ngoài mép cột (-end-1); ở cột dữ liệu cuối nó vượt khỏi khung
         // và sinh vài px cuộn ngang — kéo nó vào trong.
         "[&_th:last-child>[data-slot=data-table-resize-handle]]:end-0 [&_th:has(+[data-slot=data-table-filler]:last-child)>[data-slot=data-table-resize-handle]]:end-0",
-        className
+        className,
       )}
       {...props}
     >
@@ -132,7 +132,7 @@ export function DataTable<TData extends object>({
           className={cn(
             "table-fixed caption-bottom text-sm",
             // Change the breakpoint here and in `DataTableCards` below.
-            cards && "@max-xl/data-table:hidden"
+            cards && "@max-xl/data-table:hidden",
           )}
           // Fills the container; a filler cell takes what the columns leave.
           style={{ width: "100%", minWidth: table.getTotalSize() }}
@@ -143,7 +143,7 @@ export function DataTable<TData extends object>({
                 {withFiller(
                   headerGroup.headers,
                   getFillerIndex(
-                    headerGroup.headers.map((header) => header.column)
+                    headerGroup.headers.map((header) => header.column),
                   ),
                   (header) =>
                     header.subHeaders.length === 0 ? (
@@ -169,7 +169,7 @@ export function DataTable<TData extends object>({
                         )}
                       </TableHead>
                     ),
-                  <DataTableFillerHead />
+                  <DataTableFillerHead />,
                 )}
               </TableRow>
             ))}
@@ -205,5 +205,5 @@ export function DataTable<TData extends object>({
         />
       )}
     </div>
-  )
+  );
 }

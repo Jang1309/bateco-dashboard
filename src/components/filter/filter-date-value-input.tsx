@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { parseDateOnly, toDateOnly } from "@querycn/filter-core"
-import { useFilterActions } from "@querycn/filter-react"
-import { useDirection } from "@base-ui/react/direction-provider"
-import { CalendarIcon } from "lucide-react"
-import type { DateRange } from "react-day-picker"
+import * as React from "react";
+import { parseDateOnly, toDateOnly } from "@querycn/filter-core";
+import { useFilterActions } from "@querycn/filter-react";
+import { useDirection } from "@base-ui/react/direction-provider";
+import { CalendarIcon } from "lucide-react";
+import type { DateRange } from "react-day-picker";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row"
-import { useDateOnlyFormat } from "@/components/filter/filter-date-format"
+} from "@/components/ui/popover";
+import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row";
+import { useDateOnlyFormat } from "@/components/filter/filter-date-format";
 
 const toDay = (value: string | undefined) =>
-  (value && parseDateOnly(value)) || undefined
+  (value && parseDateOnly(value)) || undefined;
 
-const toText = (date: Date | undefined) => (date && toDateOnly(date)) || ""
+const toText = (date: Date | undefined) => (date && toDateOnly(date)) || "";
 
 /** Days as `YYYY-MM-DD` in local time, so the picked day never shifts across time zones. */
 export function DateValueInput({
@@ -31,22 +31,22 @@ export function DateValueInput({
   arity,
   setValue,
 }: FilterValueSlotProps) {
-  const { messages } = useFilterActions()
+  const { messages } = useFilterActions();
   // The calendar's arrows and weeks follow the library's reading direction.
-  const dir = useDirection()
-  const [open, setOpen] = React.useState(false)
-  const formatDateOnly = useDateOnlyFormat()
-  const range = arity === "range"
+  const dir = useDirection();
+  const [open, setOpen] = React.useState(false);
+  const formatDateOnly = useDateOnlyFormat();
+  const range = arity === "range";
   const [from, to] = (
     Array.isArray(rule.value) ? rule.value : [rule.value]
   ).map((value) =>
-    typeof value === "string" && value !== "" ? value : undefined
-  )
+    typeof value === "string" && value !== "" ? value : undefined,
+  );
   const label = range
     ? from || to
       ? `${from ? formatDateOnly(from) : "…"} ${messages.rangeSeparator} ${to ? formatDateOnly(to) : "…"}`
       : undefined
-    : from && formatDateOnly(from)
+    : from && formatDateOnly(from);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -58,7 +58,7 @@ export function DateValueInput({
             size="sm"
             className={cn(
               "justify-start text-sm font-normal",
-              range ? "w-56" : "w-40"
+              range ? "w-56" : "w-40",
             )}
           />
         }
@@ -89,12 +89,12 @@ export function DateValueInput({
             defaultMonth={toDay(from)}
             selected={toDay(from)}
             onSelect={(next: Date) => {
-              setValue(toText(next))
-              setOpen(false)
+              setValue(toText(next));
+              setOpen(false);
             }}
           />
         )}
       </PopoverContent>
     </Popover>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import { CheckIcon, TriangleAlertIcon } from "lucide-react"
-import { cn } from "cn"
-import { formatPct } from "@/lib/money"
+import { CheckIcon, TriangleAlertIcon } from "lucide-react";
+import { cn } from "cn";
+import { formatPct } from "@/lib/money";
 
 const badgeTone = {
   warning: "bg-warning-muted text-warning",
@@ -8,16 +8,16 @@ const badgeTone = {
   success: "bg-success-muted text-success",
   muted: "bg-muted text-foreground",
   neutral: "bg-neutral-muted text-foreground",
-}
+};
 
-export type Tone = keyof typeof badgeTone
+export type Tone = keyof typeof badgeTone;
 
 export function ToneBadge({
   tone,
   children,
 }: {
-  tone: Tone
-  children: React.ReactNode
+  tone: Tone;
+  children: React.ReactNode;
 }) {
   return (
     <span
@@ -28,7 +28,7 @@ export function ToneBadge({
     >
       {children}
     </span>
-  )
+  );
 }
 
 /** Khung card viền kép dùng chung các trang dashboard. */
@@ -39,11 +39,11 @@ export function Panel({
   children,
   className,
 }: {
-  title: string
-  description: string
-  action?: React.ReactNode
-  children: React.ReactNode
-  className?: string
+  title: string;
+  description: string;
+  action?: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
 }) {
   return (
     // viền kép: khay ngoài mỏng + lõi trắng, bán kính đồng tâm (1.75rem − 6px)
@@ -69,7 +69,7 @@ export function Panel({
         {children}
       </div>
     </section>
-  )
+  );
 }
 
 /** Nhãn win rate / tỷ lệ kỳ vọng: màu trạng thái luôn đi kèm icon. */
@@ -82,7 +82,7 @@ export function RatePill({ value }: { value: number }) {
         }
       : value < 80
         ? { tone: "bg-neutral-muted text-foreground", Icon: null }
-        : { tone: "bg-success-muted text-success", Icon: CheckIcon }
+        : { tone: "bg-success-muted text-success", Icon: CheckIcon };
   return (
     <span
       className={cn(
@@ -93,5 +93,5 @@ export function RatePill({ value }: { value: number }) {
       {Icon && <Icon className="size-3" aria-hidden />}
       {formatPct(value)}
     </span>
-  )
+  );
 }

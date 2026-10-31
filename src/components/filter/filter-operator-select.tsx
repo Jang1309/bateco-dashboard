@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import type { OperatorId } from "@querycn/filter-core"
-import { useFilterActions, type OperatorOption } from "@querycn/filter-react"
+import * as React from "react";
+import type { OperatorId } from "@querycn/filter-core";
+import { useFilterActions, type OperatorOption } from "@querycn/filter-react";
 
-import { cn } from "cn"
+import { cn } from "cn";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 export interface FilterOperatorSelectProps {
-  value: OperatorId | null
-  operators: readonly OperatorOption[]
-  onValueChange: (operator: OperatorId) => void
+  value: OperatorId | null;
+  operators: readonly OperatorOption[];
+  onValueChange: (operator: OperatorId) => void;
   /** Id of the element to focus once an operator is picked, e.g. the value input. */
-  focusAfterSelect?: string
-  disabled?: boolean
-  className?: string
+  focusAfterSelect?: string;
+  disabled?: boolean;
+  className?: string;
 }
 
 export function FilterOperatorSelect({
@@ -31,10 +31,10 @@ export function FilterOperatorSelect({
   disabled,
   className,
 }: FilterOperatorSelectProps) {
-  const { messages } = useFilterActions()
+  const { messages } = useFilterActions();
   // Typeahead on the closed trigger also changes the value; only a pick from the open list moves focus.
-  const open = React.useRef(false)
-  const picked = React.useRef(false)
+  const open = React.useRef(false);
+  const picked = React.useRef(false);
   // Lets the trigger show the label rather than the operator id.
   const items = React.useMemo(
     () =>
@@ -42,20 +42,20 @@ export function FilterOperatorSelect({
         label: operator.label,
         value: operator.id,
       })),
-    [operators]
-  )
+    [operators],
+  );
 
   return (
     <Select
       items={items}
       value={value}
       onOpenChange={(next) => {
-        open.current = next
+        open.current = next;
       }}
       onValueChange={(next) => {
-        if (next === null) return
-        picked.current = open.current
-        onValueChange(next)
+        if (next === null) return;
+        picked.current = open.current;
+        onValueChange(next);
       }}
       disabled={disabled || operators.length === 0}
     >
@@ -73,9 +73,9 @@ export function FilterOperatorSelect({
           const target =
             picked.current && focusAfterSelect
               ? document.getElementById(focusAfterSelect)
-              : null
-          picked.current = false
-          return target ?? true
+              : null;
+          picked.current = false;
+          return target ?? true;
         }}
       >
         {operators.map((operator) => (
@@ -89,5 +89,5 @@ export function FilterOperatorSelect({
         ))}
       </SelectContent>
     </Select>
-  )
+  );
 }

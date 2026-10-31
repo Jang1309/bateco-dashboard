@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { ChevronRightIcon } from "lucide-react"
-import { cn } from "cn"
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ChevronRightIcon } from "lucide-react";
+import { cn } from "cn";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -19,19 +19,25 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-type NavLink = { title: string; url: string }
+type NavLink = { title: string; url: string };
 /** Mục đơn có url; mục cha có items (thu/mở được), không có url riêng. */
 type NavItem =
   | (NavLink & { icon: React.ReactNode; items?: undefined })
-  | { title: string; icon: React.ReactNode; items: NavLink[]; url?: undefined }
+  | { title: string; icon: React.ReactNode; items: NavLink[]; url?: undefined };
 
 const isActiveUrl = (pathname: string, url: string) =>
-  pathname === url.split("?")[0] && !url.includes("?")
+  pathname === url.split("?")[0] && !url.includes("?");
 
-export function NavMain({ items, label }: { label?: string; items: NavItem[] }) {
-  const pathname = usePathname()
+export function NavMain({
+  items,
+  label,
+}: {
+  label?: string;
+  items: NavItem[];
+}) {
+  const pathname = usePathname();
 
   return (
     <SidebarGroup className="px-2 py-0">
@@ -56,27 +62,27 @@ export function NavMain({ items, label }: { label?: string; items: NavItem[] }) 
                 <span>{item.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
-          )
+          ),
         )}
       </SidebarMenu>
     </SidebarGroup>
-  )
+  );
 }
 
 function NavParent({
   item,
   pathname,
 }: {
-  item: Extract<NavItem, { items: NavLink[] }>
-  pathname: string
+  item: Extract<NavItem, { items: NavLink[] }>;
+  pathname: string;
 }) {
-  const childActive = item.items.some((c) => isActiveUrl(pathname, c.url))
+  const childActive = item.items.some((c) => isActiveUrl(pathname, c.url));
   // vừa vào một trang con thì tự mở; sau đó người dùng vẫn thu/mở tùy ý
-  const [open, setOpen] = useState(childActive)
-  const [wasActive, setWasActive] = useState(childActive)
+  const [open, setOpen] = useState(childActive);
+  const [wasActive, setWasActive] = useState(childActive);
   if (childActive !== wasActive) {
-    setWasActive(childActive)
-    if (childActive) setOpen(true)
+    setWasActive(childActive);
+    if (childActive) setOpen(true);
   }
 
   return (
@@ -99,7 +105,7 @@ function NavParent({
         <ChevronRightIcon
           className={cn(
             "ml-auto size-3.5 opacity-60 transition-transform duration-200",
-            open && "rotate-90"
+            open && "rotate-90",
           )}
         />
       </CollapsibleTrigger>
@@ -119,5 +125,5 @@ function NavParent({
         </SidebarMenuSub>
       </CollapsibleContent>
     </Collapsible>
-  )
+  );
 }

@@ -1,48 +1,48 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   formatCellText,
   parseCellText,
   type CellEditor,
   type CellEditorOption,
   type TableMessages,
-} from "@querycn/table-react"
+} from "@querycn/table-react";
 
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { SearchSelectCellEditor } from "@/components/data-table/data-table-search-select-editor"
+} from "@/components/ui/select";
+import { SearchSelectCellEditor } from "@/components/data-table/data-table-search-select-editor";
 
 export interface CellEditorProps {
-  value: unknown
-  editor: CellEditor
+  value: unknown;
+  editor: CellEditor;
   /** The column's name, for the editor's accessible name. */
-  label: string
+  label: string;
   /** The cell's content as the table shows it, e.g. for a trigger. */
-  display: React.ReactNode
-  messages: TableMessages
-  saving: boolean
-  invalid: boolean
+  display: React.ReactNode;
+  messages: TableMessages;
+  saving: boolean;
+  invalid: boolean;
   /**
    * `focusCell: false` after a blur, so the focus stays where it went. A
    * select passes the picked `option`, for `onCellEdit`.
    */
   onSave: (
     value: unknown,
-    options?: { focusCell?: boolean; option?: CellEditorOption }
-  ) => void
-  onCancel: (focusCell?: boolean) => void
+    options?: { focusCell?: boolean; option?: CellEditorOption },
+  ) => void;
+  onCancel: (focusCell?: boolean) => void;
   /** Shows an error without saving, e.g. for text that isn't a number. */
-  onError: (message: string) => void
+  onError: (message: string) => void;
 }
 
-export type CellEditors = Record<string, React.ComponentType<CellEditorProps>>
+export type CellEditors = Record<string, React.ComponentType<CellEditorProps>>;
 
 /** Text and numbers: Enter or leaving the input saves, Escape cancels. */
 export function TextCellEditor({
@@ -56,14 +56,14 @@ export function TextCellEditor({
   onCancel,
   onError,
 }: CellEditorProps) {
-  const initial = formatCellText(value)
-  const [text, setText] = React.useState(initial)
+  const initial = formatCellText(value);
+  const [text, setText] = React.useState(initial);
   const commit = (focusCell: boolean) => {
-    if (text === initial) return onCancel(focusCell)
-    const parsed = parseCellText(text, editor.type)
-    if (parsed.error) return onError(messages.editing[parsed.error])
-    onSave(parsed.value, { focusCell })
-  }
+    if (text === initial) return onCancel(focusCell);
+    const parsed = parseCellText(text, editor.type);
+    if (parsed.error) return onError(messages.editing[parsed.error]);
+    onSave(parsed.value, { focusCell });
+  };
 
   return (
     <Input
@@ -76,18 +76,18 @@ export function TextCellEditor({
       onChange={(event) => setText(event.target.value)}
       onKeyDown={(event) => {
         if (event.key === "Enter") {
-          event.preventDefault()
-          commit(true)
+          event.preventDefault();
+          commit(true);
         } else if (event.key === "Escape") {
-          event.preventDefault()
-          event.stopPropagation()
-          onCancel()
+          event.preventDefault();
+          event.stopPropagation();
+          onCancel();
         }
       }}
       onBlur={() => commit(false)}
       className="-my-1 h-7 px-1.5"
     />
-  )
+  );
 }
 
 /**
@@ -99,7 +99,7 @@ export function SelectCellEditor(props: CellEditorProps) {
     <SearchSelectCellEditor {...props} />
   ) : (
     <StaticSelectCellEditor {...props} />
-  )
+  );
 }
 
 function StaticSelectCellEditor({
@@ -109,9 +109,9 @@ function StaticSelectCellEditor({
   onSave,
   onCancel,
 }: CellEditorProps) {
-  const current = formatCellText(value)
-  const options = editor.options ?? []
-  const picked = React.useRef(false)
+  const current = formatCellText(value);
+  const options = editor.options ?? [];
+  const picked = React.useRef(false);
   return (
     <Select
       defaultOpen
@@ -119,12 +119,12 @@ function StaticSelectCellEditor({
       value={current}
       onValueChange={(next) => {
         // Base UI calls this for the selected item too.
-        if (next === null || next === current) return
-        picked.current = true
-        onSave(next, { option: options.find((o) => o.value === next) })
+        if (next === null || next === current) return;
+        picked.current = true;
+        onSave(next, { option: options.find((o) => o.value === next) });
       }}
       onOpenChange={(open) => {
-        if (!open && !picked.current) onCancel()
+        if (!open && !picked.current) onCancel();
       }}
     >
       <SelectTrigger size="sm" aria-label={label} className="-my-1 w-full">
@@ -138,7 +138,7 @@ function StaticSelectCellEditor({
         ))}
       </SelectContent>
     </Select>
-  )
+  );
 }
 
 /** Editor per `meta.edit.type`; `boolean` cells flip without one. */
@@ -146,4 +146,4 @@ export const cellEditors: CellEditors = {
   text: TextCellEditor,
   number: TextCellEditor,
   select: SelectCellEditor,
-}
+};

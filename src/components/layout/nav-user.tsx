@@ -1,31 +1,27 @@
-"use client"
+"use client";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 export function NavUser({
   user,
 }: {
   user: {
-    name: string
-    email: string
-    avatar: string
-  }
+    name: string;
+    email: string;
+    avatar: string;
+  };
 }) {
   const initials = user.name
     .split(" ")
     .slice(-2)
     .map((p) => p[0])
     .join("")
-    .toUpperCase()
+    .toUpperCase();
 
   return (
     <SidebarMenu>
@@ -44,5 +40,5 @@ export function NavUser({
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

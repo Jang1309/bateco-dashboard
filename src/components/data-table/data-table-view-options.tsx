@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useDirection } from "@base-ui/react/direction-provider"
+import * as React from "react";
+import { useDirection } from "@base-ui/react/direction-provider";
 import {
   enTableMessages,
   type DataTableInstance,
   type TableMessages,
-} from "@querycn/table-react"
+} from "@querycn/table-react";
 import {
   GripVerticalIcon,
   MoreHorizontalIcon,
@@ -14,44 +14,44 @@ import {
   PinIcon,
   RotateCcwIcon,
   Settings2Icon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
-import { ColorSwatch } from "@/components/data-table/data-table-column-color-menu"
-import { DataTableColumnLayoutItems } from "@/components/data-table/data-table-column-menu"
-import { getColumnLabel } from "@/components/data-table/column-label"
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
+import { ColorSwatch } from "@/components/data-table/data-table-column-color-menu";
+import { DataTableColumnLayoutItems } from "@/components/data-table/data-table-column-menu";
+import { getColumnLabel } from "@/components/data-table/column-label";
 import {
   fitColumns,
   getListedColumns,
   resetLayout,
-} from "@/components/data-table/column-layout-actions"
+} from "@/components/data-table/column-layout-actions";
 import {
   canReorderColumns,
   ColumnReorder,
   useColumnDrag,
-} from "@/components/data-table/column-reorder"
-import { useColumnColorPicker } from "@/components/data-table/use-column-color-picker"
+} from "@/components/data-table/column-reorder";
+import { useColumnColorPicker } from "@/components/data-table/use-column-color-picker";
 
 type Column<TData extends object> = ReturnType<
   DataTableInstance<TData>["getAllLeafColumns"]
->[number]
+>[number];
 
 export interface DataTableViewOptionsProps<TData extends object> {
-  table: DataTableInstance<TData>
-  messages?: TableMessages
-  className?: string
+  table: DataTableInstance<TData>;
+  messages?: TableMessages;
+  className?: string;
 }
 
 /**
@@ -63,24 +63,24 @@ export function DataTableViewOptions<TData extends object>({
   messages = enTableMessages,
   className,
 }: DataTableViewOptionsProps<TData>) {
-  const dir = useDirection()
-  const canReorder = canReorderColumns(table)
+  const dir = useDirection();
+  const canReorder = canReorderColumns(table);
   const canFit = table
     .getVisibleLeafColumns()
-    .some((column) => column.getCanResize())
-  const [open, setOpen] = React.useState(false)
+    .some((column) => column.getCanResize());
+  const [open, setOpen] = React.useState(false);
   // Escape or a click outside mid-move cancels the move, not the list.
-  const [dragging, setDragging] = React.useState(false)
-  const colorPicker = useColumnColorPicker()
+  const [dragging, setDragging] = React.useState(false);
+  const colorPicker = useColumnColorPicker();
   return (
     <>
       <Popover
         open={open}
         onOpenChange={(next, details) => {
-          if (next || !dragging) return setOpen(next)
+          if (next || !dragging) return setOpen(next);
           // Stay open, and let the Escape through to cancel the move.
-          details.allowPropagation()
-          details.cancel()
+          details.allowPropagation();
+          details.cancel();
         }}
       >
         <PopoverTrigger
@@ -144,7 +144,7 @@ export function DataTableViewOptions<TData extends object>({
       </Popover>
       <input {...colorPicker.inputProps} />
     </>
-  )
+  );
 }
 
 function ColumnItem<TData extends object>({
@@ -154,13 +154,13 @@ function ColumnItem<TData extends object>({
   canReorder,
   onCustomColor,
 }: {
-  table: DataTableInstance<TData>
-  column: Column<TData>
-  messages: TableMessages
-  canReorder: boolean
-  onCustomColor: () => void
+  table: DataTableInstance<TData>;
+  column: Column<TData>;
+  messages: TableMessages;
+  canReorder: boolean;
+  onCustomColor: () => void;
 }) {
-  const label = getColumnLabel(column)
+  const label = getColumnLabel(column);
   const {
     disabled: isFixed,
     isDragging,
@@ -169,9 +169,9 @@ function ColumnItem<TData extends object>({
     setHandleRef,
     handleProps,
     style,
-  } = useColumnDrag(column, canReorder)
-  const color = column.getColor()
-  const pinned = column.getIsPinned()
+  } = useColumnDrag(column, canReorder);
+  const color = column.getColor();
+  const pinned = column.getIsPinned();
 
   return (
     <li
@@ -233,5 +233,5 @@ function ColumnItem<TData extends object>({
         </DropdownMenuContent>
       </DropdownMenu>
     </li>
-  )
+  );
 }

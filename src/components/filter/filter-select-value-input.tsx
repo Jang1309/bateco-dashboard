@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import type { FilterValue } from "@querycn/filter-core"
-import { useFieldOptions, useFilterActions } from "@querycn/filter-react"
+import * as React from "react";
+import type { FilterValue } from "@querycn/filter-core";
+import { useFieldOptions, useFilterActions } from "@querycn/filter-react";
 
-import { Badge } from "@/components/ui/badge"
-import { FilterCombobox } from "@/components/filter/filter-combobox"
-import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row"
+import { Badge } from "@/components/ui/badge";
+import { FilterCombobox } from "@/components/filter/filter-combobox";
+import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row";
 
 const toValues = (value: FilterValue): string[] =>
   value === null
     ? []
     : Array.isArray(value)
       ? value.map(String)
-      : [String(value)]
+      : [String(value)];
 
 /**
  * One value, or several for `multi` operators (`in`, `notIn`), from static
@@ -26,13 +26,13 @@ export function SelectValueInput({
   arity,
   setValue,
 }: FilterValueSlotProps) {
-  const { messages } = useFilterActions()
-  const [open, setOpen] = React.useState(false)
-  const multiple = arity === "multi"
-  const selected = React.useMemo(() => toValues(rule.value), [rule.value])
+  const { messages } = useFilterActions();
+  const [open, setOpen] = React.useState(false);
+  const multiple = arity === "multi";
+  const selected = React.useMemo(() => toValues(rule.value), [rule.value]);
   const { options, loading, error, query, search, retry, getLabel } =
-    useFieldOptions(field, { selected, enabled: open })
-  const [first] = selected
+    useFieldOptions(field, { selected, enabled: open });
+  const [first] = selected;
 
   return (
     <FilterCombobox
@@ -65,5 +65,5 @@ export function SelectValueInput({
       onRetry={retry}
       onOpenChange={setOpen}
     />
-  )
+  );
 }

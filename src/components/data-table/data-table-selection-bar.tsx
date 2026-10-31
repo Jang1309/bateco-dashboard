@@ -1,36 +1,36 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   enTableMessages,
   type DataTableInstance,
   type DataTableRow,
   type TableMessages,
-} from "@querycn/table-react"
-import { XIcon } from "lucide-react"
+} from "@querycn/table-react";
+import { XIcon } from "lucide-react";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { onToolbarArrowKeys } from "@/components/data-table/toolbar-arrow-keys"
-import { useFloatingSelectionBar } from "@/components/data-table/use-floating-selection-bar"
-import { useBulkEdit } from "@/components/data-table/use-bulk-edit"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { onToolbarArrowKeys } from "@/components/data-table/toolbar-arrow-keys";
+import { useFloatingSelectionBar } from "@/components/data-table/use-floating-selection-bar";
+import { useBulkEdit } from "@/components/data-table/use-bulk-edit";
 import {
   cellEditors as defaultCellEditors,
   type CellEditors,
-} from "@/components/data-table/data-table-cell-editors"
-import { DataTableBulkEditDialog } from "@/components/data-table/data-table-bulk-edit-dialog"
+} from "@/components/data-table/data-table-cell-editors";
+import { DataTableBulkEditDialog } from "@/components/data-table/data-table-bulk-edit-dialog";
 
 export interface DataTableSelectionBarProps<TData extends object> extends Omit<
   React.ComponentProps<"div">,
   "children"
 > {
-  table: DataTableInstance<TData>
-  messages?: TableMessages
+  table: DataTableInstance<TData>;
+  messages?: TableMessages;
   /** What can be done with the selected rows, e.g. a delete button. */
-  actions?: (rows: DataTableRow<TData>[]) => React.ReactNode
+  actions?: (rows: DataTableRow<TData>[]) => React.ReactNode;
   /** Editors by `meta.edit.type` for the bulk edit dialog, as on `DataTable`. */
-  cellEditors?: CellEditors
+  cellEditors?: CellEditors;
 }
 
 /**
@@ -46,10 +46,10 @@ export function DataTableSelectionBar<TData extends object>({
   className,
   ...props
 }: DataTableSelectionBarProps<TData>) {
-  const { ref, mounted, closing, rows } = useFloatingSelectionBar(table)
-  const countId = React.useId()
-  const bulk = useBulkEdit({ table, rows, messages })
-  if (!mounted || (!actions && bulk.columns.length === 0)) return null
+  const { ref, mounted, closing, rows } = useFloatingSelectionBar(table);
+  const countId = React.useId();
+  const bulk = useBulkEdit({ table, rows, messages });
+  if (!mounted || (!actions && bulk.columns.length === 0)) return null;
   return (
     <div
       ref={ref}
@@ -64,7 +64,7 @@ export function DataTableSelectionBar<TData extends object>({
         // Buttons inside, the app's too, hover in the pill's colors, beating `ghost`'s own.
         "[&_button:not(:disabled):hover]:bg-background/15 [&_button:not(:disabled):hover]:text-background [&_button[aria-expanded=true]]:bg-background/15 [&_button[aria-expanded=true]]:text-background",
         "duration-200 data-[state=closed]:pointer-events-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom-4 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-4 motion-reduce:animate-none",
-        className
+        className,
       )}
       {...props}
     >
@@ -98,5 +98,5 @@ export function DataTableSelectionBar<TData extends object>({
         </>
       )}
     </div>
-  )
+  );
 }

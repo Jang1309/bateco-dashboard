@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { formatCellText, type TableMessages } from "@querycn/table-react"
-import { XIcon } from "lucide-react"
+import * as React from "react";
+import { formatCellText, type TableMessages } from "@querycn/table-react";
+import { XIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import type { BulkEditField } from "@/components/data-table/bulk-edit-fields"
-import { getColumnLabel } from "@/components/data-table/column-label"
-import type { BulkEditState } from "@/components/data-table/use-bulk-edit"
+} from "@/components/ui/select";
+import type { BulkEditField } from "@/components/data-table/bulk-edit-fields";
+import { getColumnLabel } from "@/components/data-table/column-label";
+import type { BulkEditState } from "@/components/data-table/use-bulk-edit";
 import {
   TextCellEditor,
   type CellEditors,
-} from "@/components/data-table/data-table-cell-editors"
+} from "@/components/data-table/data-table-cell-editors";
 
 export interface DataTableBulkEditFieldProps<TData extends object> {
-  bulk: BulkEditState<TData>
-  field: BulkEditField
-  editors: CellEditors
-  messages: TableMessages
+  bulk: BulkEditState<TData>;
+  field: BulkEditField;
+  editors: CellEditors;
+  messages: TableMessages;
   /** Gets the column picker, to focus a field just added. */
-  pickerRef?: React.Ref<HTMLButtonElement>
+  pickerRef?: React.Ref<HTMLButtonElement>;
 }
 
 /** One line of the bulk edit dialog: a column, its new value, remove. */
@@ -38,10 +38,10 @@ export function DataTableBulkEditField<TData extends object>({
   messages,
   pickerRef,
 }: DataTableBulkEditFieldProps<TData>) {
-  const valueRef = React.useRef<HTMLDivElement>(null)
-  const picked = React.useRef(false)
-  const column = bulk.columns.find((c) => c.id === field.columnId)
-  const label = column ? getColumnLabel(column) : undefined
+  const valueRef = React.useRef<HTMLDivElement>(null);
+  const picked = React.useRef(false);
+  const column = bulk.columns.find((c) => c.id === field.columnId);
+  const label = column ? getColumnLabel(column) : undefined;
 
   return (
     <li className="flex flex-col gap-1.5">
@@ -54,17 +54,17 @@ export function DataTableBulkEditField<TData extends object>({
           value={field.columnId ?? null}
           onValueChange={(id) => {
             // Base UI calls this for the selected item too.
-            if (id === null || id === field.columnId) return
-            picked.current = true
-            bulk.setColumn(field.key, id)
+            if (id === null || id === field.columnId) return;
+            picked.current = true;
+            bulk.setColumn(field.key, id);
           }}
           onOpenChangeComplete={(open) => {
-            if (open || !picked.current) return
-            picked.current = false
+            if (open || !picked.current) return;
+            picked.current = false;
             // On to the value, rather than back to the picker.
             valueRef.current
               ?.querySelector<HTMLElement>("input, button")
-              ?.focus()
+              ?.focus();
           }}
           disabled={bulk.pending}
         >
@@ -106,7 +106,7 @@ export function DataTableBulkEditField<TData extends object>({
             variant="ghost"
             size="icon-sm"
             aria-label={messages.bulkEdit.removeField(
-              label ?? messages.bulkEdit.column
+              label ?? messages.bulkEdit.column,
             )}
             disabled={bulk.pending}
             onClick={() => bulk.removeField(field.key)}
@@ -122,7 +122,7 @@ export function DataTableBulkEditField<TData extends object>({
         </p>
       )}
     </li>
-  )
+  );
 }
 
 /** The column's cell editor, saving into the field instead of a cell. */
@@ -134,10 +134,10 @@ function FieldValue<TData extends object>({
   editors,
   messages,
 }: Omit<DataTableBulkEditFieldProps<TData>, "pickerRef"> & {
-  column: BulkEditState<TData>["columns"][number]
-  label: string
+  column: BulkEditState<TData>["columns"][number];
+  label: string;
 }) {
-  const editor = column.columnDef.meta!.edit!
+  const editor = column.columnDef.meta!.edit!;
   if (editor.type === "boolean") {
     return (
       <Checkbox
@@ -148,11 +148,11 @@ function FieldValue<TData extends object>({
           bulk.setValue(field.key, checked === true)
         }
       />
-    )
+    );
   }
   const Editor = Object.hasOwn(editors, editor.type)
     ? editors[editor.type]!
-    : TextCellEditor
+    : TextCellEditor;
   return (
     <Editor
       value={field.value}
@@ -173,5 +173,5 @@ function FieldValue<TData extends object>({
       onCancel={() => bulk.setError(field.key, undefined)}
       onError={(message) => bulk.setError(field.key, message)}
     />
-  )
+  );
 }

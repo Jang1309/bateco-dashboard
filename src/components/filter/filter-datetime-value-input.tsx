@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { parseDateOnly, toDateOnly } from "@querycn/filter-core"
-import { useFilterActions } from "@querycn/filter-react"
-import { useDirection } from "@base-ui/react/direction-provider"
-import { CalendarIcon } from "lucide-react"
+import { parseDateOnly, toDateOnly } from "@querycn/filter-core";
+import { useFilterActions } from "@querycn/filter-react";
+import { useDirection } from "@base-ui/react/direction-provider";
+import { CalendarIcon } from "lucide-react";
 
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from "@/components/ui/calendar";
 import {
   PickerField,
   PickerFooter,
   RangePickerField,
   type PickerPanel,
-} from "@/components/filter/filter-picker-field"
-import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row"
+} from "@/components/filter/filter-picker-field";
+import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row";
 import {
   currentDateTime,
   splitDateTime,
   useDateTimeFormat,
-} from "@/components/filter/filter-date-format"
-import { TimeColumns } from "@/components/filter/filter-time-panel"
-import { toTextRange } from "@/components/filter/filter-picker-field-parts"
+} from "@/components/filter/filter-date-format";
+import { TimeColumns } from "@/components/filter/filter-time-panel";
+import { toTextRange } from "@/components/filter/filter-picker-field-parts";
 
 const toDay = (day: string | undefined) =>
-  (day && parseDateOnly(day)) || undefined
+  (day && parseDateOnly(day)) || undefined;
 
 /**
  * A moment as the local `YYYY-MM-DDTHH:mm`, picked from a calendar and hour
@@ -35,12 +35,12 @@ export function DateTimeValueInput({
   arity,
   setValue,
 }: FilterValueSlotProps) {
-  const { messages } = useFilterActions()
+  const { messages } = useFilterActions();
   // The calendar's arrows and weeks follow the library's reading direction.
-  const dir = useDirection()
-  const format = useDateTimeFormat()
+  const dir = useDirection();
+  const format = useDateTimeFormat();
   const panel: PickerPanel = (value, onChange, onOk) => {
-    const { day, time } = splitDateTime(value)
+    const { day, time } = splitDateTime(value);
     return (
       <>
         <div className="flex">
@@ -72,13 +72,13 @@ export function DateTimeValueInput({
           okDisabled={!day}
           onOk={onOk}
           onNow={() => {
-            onChange(currentDateTime())
-            onOk()
+            onChange(currentDateTime());
+            onOk();
           }}
         />
       </>
-    )
-  }
+    );
+  };
   return arity === "range" ? (
     <RangePickerField
       id={id}
@@ -102,5 +102,5 @@ export function DateTimeValueInput({
       panel={panel}
       className="w-48"
     />
-  )
+  );
 }

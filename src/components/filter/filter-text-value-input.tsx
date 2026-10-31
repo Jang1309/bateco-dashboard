@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { getFieldType, type FilterValue } from "@querycn/filter-core"
-import { useFilterActions } from "@querycn/filter-react"
+import * as React from "react";
+import { getFieldType, type FilterValue } from "@querycn/filter-core";
+import { useFilterActions } from "@querycn/filter-react";
 
-import { cn } from "cn"
-import { Input } from "@/components/ui/input"
-import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row"
+import { cn } from "cn";
+import { Input } from "@/components/ui/input";
+import type { FilterValueSlotProps } from "@/components/filter/filter-rule-row";
 
 const toText = (value: FilterValue | undefined): string =>
   value === null || value === undefined || typeof value === "object"
     ? ""
-    : String(value)
+    : String(value);
 
 function TextLikeInput({
   id,
@@ -20,16 +20,16 @@ function TextLikeInput({
   arity,
   setValue,
 }: FilterValueSlotProps) {
-  const { context, messages } = useFilterActions()
+  const { context, messages } = useFilterActions();
   // Raw text goes into the draft; the field type parses it on apply, so "1." can be typed.
   const invalid = (text: string) =>
     text.trim() !== "" &&
     getFieldType(field, context.registry)?.parseValue(text, "single") ===
-      undefined
+      undefined;
   const input = (
     text: string,
     onText: (text: string) => void,
-    props: React.ComponentProps<"input">
+    props: React.ComponentProps<"input">,
   ) => (
     <Input
       value={text}
@@ -38,16 +38,16 @@ function TextLikeInput({
       {...props}
       className={cn("h-7", props.className)}
     />
-  )
+  );
 
   if (arity === "range") {
     const [from, to] =
       Array.isArray(rule.value) && rule.value.length === 2
         ? rule.value.map(toText)
-        : ["", ""]
+        : ["", ""];
     // A range with one side filled is dropped on apply, so flag the empty side.
     const missing = (text: string, other: string) =>
-      text.trim() === "" && other.trim() !== ""
+      text.trim() === "" && other.trim() !== "";
     return (
       <div className="flex items-center gap-1.5">
         {input(from!, (text) => setValue([text, to!]), {
@@ -67,23 +67,23 @@ function TextLikeInput({
           "aria-label": `${field.label} ${messages.placeholders.to}`,
         })}
       </div>
-    )
+    );
   }
 
-  if (arity !== "single") return null
+  if (arity !== "single") return null;
   return input(toText(rule.value), setValue, {
     id,
     className: "w-40",
     placeholder: messages.placeholders.value,
     "aria-label": field.label,
-  })
+  });
 }
 
 export function TextValueInput(props: FilterValueSlotProps) {
-  return <TextLikeInput {...props} />
+  return <TextLikeInput {...props} />;
 }
 
 // No `inputMode="decimal"`: iOS's decimal keypad has no minus key.
 export function NumberValueInput(props: FilterValueSlotProps) {
-  return <TextLikeInput {...props} />
+  return <TextLikeInput {...props} />;
 }

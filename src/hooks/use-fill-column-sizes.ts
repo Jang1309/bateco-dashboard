@@ -20,7 +20,9 @@ export function useFillColumnSizes<K extends string>(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const ro = new ResizeObserver(([entry]) => setWidth(entry!.contentRect.width));
+    const ro = new ResizeObserver(([entry]) =>
+      setWidth(entry!.contentRect.width),
+    );
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
@@ -32,7 +34,10 @@ export function useFillColumnSizes<K extends string>(
     const extra = Math.max(0, width - 2 - total);
     const weight = keys.reduce((s, k) => s + (grow[k] ?? 0), 0) || 1;
     return Object.fromEntries(
-      keys.map((k) => [k, Math.floor(base[k] * root + (extra * (grow[k] ?? 0)) / weight)]),
+      keys.map((k) => [
+        k,
+        Math.floor(base[k] * root + (extra * (grow[k] ?? 0)) / weight),
+      ]),
     ) as Record<K, number>;
   }, [base, grow, root, width]);
 

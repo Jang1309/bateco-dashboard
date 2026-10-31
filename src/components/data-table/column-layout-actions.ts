@@ -1,76 +1,76 @@
-import * as React from "react"
-import type { DataTableInstance } from "@querycn/table-react"
+import * as React from "react";
+import type { DataTableInstance } from "@querycn/table-react";
 
-import { measureColumnWidth } from "@/components/data-table/measure-column-width"
+import { measureColumnWidth } from "@/components/data-table/measure-column-width";
 
 type Column<TData extends object> = ReturnType<
   DataTableInstance<TData>["getAllLeafColumns"]
->[number]
+>[number];
 
-const FIT_MAX = 800
+const FIT_MAX = 800;
 
 /** The width a column may take: its `minSize` and `maxSize`. */
 export function getColumnWidthBounds(column: {
-  columnDef: { minSize?: number; maxSize?: number }
+  columnDef: { minSize?: number; maxSize?: number };
 }) {
   return {
     min: column.columnDef.minSize ?? 20,
     max: column.columnDef.maxSize ?? Number.MAX_SAFE_INTEGER,
-  }
+  };
 }
 
 /** Widths that show each column's rendered cells in full, within its bounds. */
 export function measureColumnWidths<TData extends object>(
   container: HTMLElement,
-  columns: Column<TData>[]
+  columns: Column<TData>[],
 ) {
   return Object.fromEntries(
     columns.map((column) => {
-      const { min, max } = getColumnWidthBounds(column)
+      const { min, max } = getColumnWidthBounds(column);
       // `meta.fitMaxSize` giới hạn riêng "Vừa nội dung", để kéo tay vẫn nới rộng được
-      const fitMax = column.columnDef.meta?.fitMaxSize ?? FIT_MAX
+      const fitMax = column.columnDef.meta?.fitMaxSize ?? FIT_MAX;
       return [
         column.id,
         measureColumnWidth(container, column.id, {
           min,
           max: Math.min(max, fitMax),
         }),
-      ]
-    })
-  )
+      ];
+    }),
+  );
 }
 
 // Each table's scroll container, for menus rendered outside it.
-const containers = new WeakMap<object, HTMLElement>()
+const containers = new WeakMap<object, HTMLElement>();
 
 /** `DataTable` registers its scroll container, so menus outside it can measure cells. */
 export function useTableContainer(
   table: object,
-  ref: React.RefObject<HTMLElement | null>
+  ref: React.RefObject<HTMLElement | null>,
 ) {
   React.useEffect(() => {
-    const node = ref.current
-    if (!node) return
-    containers.set(table, node)
+    const node = ref.current;
+    if (!node) return;
+    containers.set(table, node);
     return () => {
-      if (containers.get(table) === node) containers.delete(table)
-    }
-  }, [table, ref])
+      if (containers.get(table) === node) containers.delete(table);
+    };
+  }, [table, ref]);
 }
 
 export function getTableContainer(table: object): HTMLElement | undefined {
-  return containers.get(table)
+  return containers.get(table);
 }
 
 /** Fits the columns (every visible resizable one by default) to their content. */
 export function fitColumns<TData extends object>(
   table: DataTableInstance<TData>,
-  columns = table.getVisibleLeafColumns().filter((c) => c.getCanResize())
+  columns = table.getVisibleLeafColumns().filter((c) => c.getCanResize()),
 ) {
-  const container = containers.get(table)
-  if (!container || columns.length === 0) return
-  const widths = measureColumnWidths(container, columns)
-  table.setColumnSizing((sizes) => ({ ...sizes, ...widths }))
+  const container = containers.get(table);
+  if (!container || columns.length === 0) return;
+  const widths = measureColumnWidths(container, columns);
+  table.setColumnSizing((sizes) => ({ ...sizes, ...widths }));
 }
 
 /**
@@ -80,17 +80,17 @@ export function fitColumns<TData extends object>(
 export function pinColumn<TData extends object>(
   table: DataTableInstance<TData>,
   column: Column<TData>,
-  position: "start" | "end" | false
+  position: "start" | "end" | false,
 ) {
   table.setColumnPinning(({ start = [], end = [] }) => {
     const pinning = {
       start: start.filter((id) => id !== column.id),
       end: end.filter((id) => id !== column.id),
-    }
-    if (position === "start") pinning.start.push(column.id)
-    if (position === "end") pinning.end.unshift(column.id)
-    return pinning
-  })
+    };
+    if (position === "start") pinning.start.push(column.id);
+    if (position === "end") pinning.end.unshift(column.id);
+    return pinning;
+  });
 }
 
 /**
@@ -98,9 +98,9 @@ export function pinColumn<TData extends object>(
  * forgetting the saved layout so later column changes apply.
  */
 export function resetLayout<TData extends object>(
-  table: DataTableInstance<TData>
+  table: DataTableInstance<TData>,
 ) {
-  table.options.meta?.resetLayout()
+  table.options.meta?.resetLayout();
 }
 
 /**
@@ -109,17 +109,17 @@ export function resetLayout<TData extends object>(
  * would cover the select-all checkbox.
  */
 export function hasColumnMenu(column: {
-  getCanSort: () => boolean
-  getCanPin: () => boolean
-  getCanResize: () => boolean
-  getCanHide: () => boolean
+  getCanSort: () => boolean;
+  getCanPin: () => boolean;
+  getCanResize: () => boolean;
+  getCanHide: () => boolean;
 }) {
   return (
     column.getCanSort() ||
     column.getCanPin() ||
     column.getCanResize() ||
     column.getCanHide()
-  )
+  );
 }
 
 /**
@@ -128,7 +128,7 @@ export function hasColumnMenu(column: {
  * a selection column.
  */
 export function getListedColumns<TData extends object>(
-  table: DataTableInstance<TData>
+  table: DataTableInstance<TData>,
 ) {
   return [
     ...table.getStartLeafColumns(),
@@ -139,6 +139,6 @@ export function getListedColumns<TData extends object>(
       column.getCanHide() ||
       column.getCanPin() ||
       (table.options.meta?.enableColumnOrdering !== false &&
-        column.columnDef.meta?.enableOrdering !== false)
-  )
+        column.columnDef.meta?.enableOrdering !== false),
+  );
 }

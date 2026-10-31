@@ -1,16 +1,13 @@
-import Link from "next/link"
-import { TrendingUpIcon } from "lucide-react"
-import type { BudgetOverview } from "@/lib/db/budget"
-import { ExportButton, YearSelect } from "@/components/dashboard/controls"
-import { outlineBtn } from "@/components/dashboard/kpi-strip"
-import {
-  CustomizeButton,
-  DashboardSections,
-} from "./components/customize"
+import Link from "next/link";
+import { TrendingUpIcon } from "lucide-react";
+import type { BudgetOverview } from "@/lib/db/budget";
+import { ExportButton, YearSelect } from "@/components/dashboard/controls";
+import { outlineBtn } from "@/components/dashboard/kpi-strip";
+import { CustomizeButton, DashboardSections } from "./components/customize";
 
 export function TongQuanView({ data }: { data: BudgetOverview }) {
-  const { kpis, owners, year } = data
-  const budgetCount = owners.reduce((s, o) => s + o.budgetCount, 0)
+  const { kpis, owners, year } = data;
+  const budgetCount = owners.reduce((s, o) => s + o.budgetCount, 0);
 
   return (
     <div className="flex flex-col pb-12">
@@ -42,5 +39,5 @@ export function TongQuanView({ data }: { data: BudgetOverview }) {
         <DashboardSections data={data} />
       </div>
     </div>
-  )
+  );
 }

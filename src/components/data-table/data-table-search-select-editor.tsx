@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useDirection } from "@base-ui/react/direction-provider"
-import { useFieldOptions } from "@querycn/filter-react"
-import { formatCellText } from "@querycn/table-react"
-import { ChevronsUpDownIcon } from "lucide-react"
+import * as React from "react";
+import { useDirection } from "@base-ui/react/direction-provider";
+import { useFieldOptions } from "@querycn/filter-react";
+import { formatCellText } from "@querycn/table-react";
+import { ChevronsUpDownIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -14,13 +14,13 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import type { CellEditorProps } from "@/components/data-table/data-table-cell-editors"
+} from "@/components/ui/popover";
+import type { CellEditorProps } from "@/components/data-table/data-table-cell-editors";
 
 /**
  * A `select` with `loadOptions`: a search box over the options your API
@@ -35,9 +35,9 @@ export function SearchSelectCellEditor({
   onSave,
   onCancel,
 }: CellEditorProps) {
-  const dir = useDirection()
-  const current = formatCellText(value)
-  const [open, setOpen] = React.useState(true)
+  const dir = useDirection();
+  const current = formatCellText(value);
+  const [open, setOpen] = React.useState(true);
   const field = React.useMemo(
     () => ({
       name: label,
@@ -46,19 +46,19 @@ export function SearchSelectCellEditor({
       options: editor.options && [...editor.options],
       loadOptions: editor.loadOptions,
     }),
-    [label, editor]
-  )
+    [label, editor],
+  );
   const { options, loading, error, query, search, retry } = useFieldOptions(
     field,
-    { enabled: open }
-  )
+    { enabled: open },
+  );
 
   return (
     <Popover
       open={open}
       onOpenChange={(next) => {
-        setOpen(next)
-        if (!next) onCancel()
+        setOpen(next);
+        if (!next) onCancel();
       }}
     >
       <PopoverTrigger
@@ -112,10 +112,10 @@ export function SearchSelectCellEditor({
                   value={option.value}
                   data-checked={option.value === current}
                   onSelect={() => {
-                    if (option.value === current) return onCancel()
+                    if (option.value === current) return onCancel();
                     // Closed without `onOpenChange`, which would cancel.
-                    setOpen(false)
-                    onSave(option.value, { option })
+                    setOpen(false);
+                    onSave(option.value, { option });
                   }}
                 >
                   <span className="truncate">{option.label}</span>
@@ -126,5 +126,5 @@ export function SearchSelectCellEditor({
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

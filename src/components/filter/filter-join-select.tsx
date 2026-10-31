@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import type { Join } from "@querycn/filter-core"
-import { useFilterActions } from "@querycn/filter-react"
+import * as React from "react";
+import type { Join } from "@querycn/filter-core";
+import { useFilterActions } from "@querycn/filter-react";
 
-import { cn } from "cn"
+import { cn } from "cn";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 export interface FilterJoinSelectProps {
-  value: Join
-  onValueChange: (join: Join) => void
-  className?: string
+  value: Join;
+  onValueChange: (join: Join) => void;
+  className?: string;
 }
 
 export function FilterJoinSelect({
@@ -24,21 +24,21 @@ export function FilterJoinSelect({
   onValueChange,
   className,
 }: FilterJoinSelectProps) {
-  const { messages } = useFilterActions()
+  const { messages } = useFilterActions();
   // Lets the trigger show the label rather than the raw value.
   const items = React.useMemo(
     () => [
       { label: messages.join.and, value: "and" },
       { label: messages.join.or, value: "or" },
     ],
-    [messages]
-  )
+    [messages],
+  );
   return (
     <Select
       items={items}
       value={value}
       onValueChange={(next) => {
-        if (next !== null) onValueChange(next === "or" ? "or" : "and")
+        if (next !== null) onValueChange(next === "or" ? "or" : "and");
       }}
     >
       <SelectTrigger
@@ -56,5 +56,5 @@ export function FilterJoinSelect({
         ))}
       </SelectContent>
     </Select>
-  )
+  );
 }

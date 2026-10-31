@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import type { DataTableInstance, TableMessages } from "@querycn/table-react"
+import * as React from "react";
+import type { DataTableInstance, TableMessages } from "@querycn/table-react";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
   ChevronsUpDownIcon,
   GripVerticalIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { cn } from "cn"
-import { TableHead } from "@/components/ui/table"
+import { cn } from "cn";
+import { TableHead } from "@/components/ui/table";
 import {
   headerCellClassName,
   pinnedCellClassName,
-} from "@/components/data-table/data-table-cell-classes"
+} from "@/components/data-table/data-table-cell-classes";
 import {
   getHeaderCellProps,
   type PinnedEdges,
-} from "@/components/data-table/data-table-pinning"
-import { getColumnLabel } from "@/components/data-table/column-label"
-import { hasColumnMenu } from "@/components/data-table/column-layout-actions"
-import { DataTableColumnMenu } from "@/components/data-table/data-table-column-menu"
-import { ColumnGuideLine } from "@/components/data-table/column-guide-line"
-import { useColumnDrag } from "@/components/data-table/column-reorder"
-import { ColumnResizeHandle } from "@/components/data-table/column-resize-handle"
-import { useColumnColorPicker } from "@/components/data-table/use-column-color-picker"
+} from "@/components/data-table/data-table-pinning";
+import { getColumnLabel } from "@/components/data-table/column-label";
+import { hasColumnMenu } from "@/components/data-table/column-layout-actions";
+import { DataTableColumnMenu } from "@/components/data-table/data-table-column-menu";
+import { ColumnGuideLine } from "@/components/data-table/column-guide-line";
+import { useColumnDrag } from "@/components/data-table/column-reorder";
+import { ColumnResizeHandle } from "@/components/data-table/column-resize-handle";
+import { useColumnColorPicker } from "@/components/data-table/use-column-color-picker";
 
 type Header<TData extends object> = ReturnType<
   DataTableInstance<TData>["getFlatHeaders"]
->[number]
+>[number];
 
-const ARIA_SORT = { asc: "ascending", desc: "descending" } as const
+const ARIA_SORT = { asc: "ascending", desc: "descending" } as const;
 
 /**
  * A leaf column's header cell: click to sort (Shift+click adds the column to
@@ -45,19 +45,19 @@ export function DataTableColumnHeader<TData extends object>({
   messages,
   canReorder,
 }: {
-  table: DataTableInstance<TData>
-  header: Header<TData>
-  edges: PinnedEdges
-  messages: TableMessages
-  canReorder: boolean
+  table: DataTableInstance<TData>;
+  header: Header<TData>;
+  edges: PinnedEdges;
+  messages: TableMessages;
+  canReorder: boolean;
 }) {
-  const { column } = header
-  const label = getColumnLabel(column)
-  const sorted = column.getIsSorted()
+  const { column } = header;
+  const label = getColumnLabel(column);
+  const sorted = column.getIsSorted();
   const sortIndex =
     sorted && table.store.state.sorting.length > 1
       ? column.getSortIndex() + 1
-      : undefined
+      : undefined;
   const {
     disabled: isFixed,
     isDragging,
@@ -67,17 +67,17 @@ export function DataTableColumnHeader<TData extends object>({
     setHandleRef,
     handleProps,
     style: dragStyle,
-  } = useColumnDrag(column, canReorder)
-  const cellProps = getHeaderCellProps(header, edges)
-  const [menuOpen, setMenuOpen] = React.useState(false)
-  const colorPicker = useColumnColorPicker()
-  const hasMenu = hasColumnMenu(column)
+  } = useColumnDrag(column, canReorder);
+  const cellProps = getHeaderCellProps(header, edges);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const colorPicker = useColumnColorPicker();
+  const hasMenu = hasColumnMenu(column);
   const SortIcon =
     sorted === "asc"
       ? ArrowUpIcon
       : sorted === "desc"
         ? ArrowDownIcon
-        : ChevronsUpDownIcon
+        : ChevronsUpDownIcon;
 
   const title = (
     <>
@@ -90,7 +90,7 @@ export function DataTableColumnHeader<TData extends object>({
         </span>
       )}
     </>
-  )
+  );
 
   return (
     <TableHead
@@ -101,23 +101,23 @@ export function DataTableColumnHeader<TData extends object>({
       }
       data-dragging={isDragging || undefined}
       onContextMenu={(event) => {
-        if (!hasMenu) return
-        event.preventDefault()
-        setMenuOpen(true)
+        if (!hasMenu) return;
+        event.preventDefault();
+        setMenuOpen(true);
       }}
       {...cellProps}
       style={{ ...cellProps.style, ...dragStyle }}
       className={cn(
         pinnedCellClassName,
         headerCellClassName,
-        "group/header data-dragging:z-30"
+        "group/header data-dragging:z-30",
       )}
     >
       <div
         {...pointerProps}
         className={cn(
           "flex min-w-0 items-center",
-          !isFixed && "cursor-grab active:cursor-grabbing"
+          !isFixed && "cursor-grab active:cursor-grabbing",
         )}
       >
         {column.getCanSort() ? (
@@ -132,7 +132,7 @@ export function DataTableColumnHeader<TData extends object>({
               className={cn(
                 "size-3.5 shrink-0",
                 !sorted &&
-                  "text-muted-foreground opacity-0 group-hover/header:opacity-100"
+                  "text-muted-foreground opacity-0 group-hover/header:opacity-100",
               )}
             />
             {sortIndex !== undefined && (
@@ -181,5 +181,5 @@ export function DataTableColumnHeader<TData extends object>({
         />
       )}
     </TableHead>
-  )
+  );
 }

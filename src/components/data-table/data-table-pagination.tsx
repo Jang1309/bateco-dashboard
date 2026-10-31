@@ -1,40 +1,40 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   enTableMessages,
   type DataTableInstance,
   type TableMessages,
-} from "@querycn/table-react"
+} from "@querycn/table-react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronsLeftIcon,
   ChevronsRightIcon,
   MoreHorizontalIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { getPaginationState } from "@/components/data-table/data-table-pagination-state"
-import { pageRange } from "@/components/data-table/page-range"
-import { useKeepFocusInPagination } from "@/components/data-table/use-keep-focus-in-pagination"
+} from "@/components/ui/select";
+import { getPaginationState } from "@/components/data-table/data-table-pagination-state";
+import { pageRange } from "@/components/data-table/page-range";
+import { useKeepFocusInPagination } from "@/components/data-table/use-keep-focus-in-pagination";
 
 export interface DataTablePaginationProps<TData extends object> extends Omit<
   React.ComponentProps<"div">,
   "children"
 > {
-  table: DataTableInstance<TData>
-  messages?: TableMessages
+  table: DataTableInstance<TData>;
+  messages?: TableMessages;
   /** Page buttons between the arrows, ellipses included. */
-  slots?: number
+  slots?: number;
 }
 
 /**
@@ -48,17 +48,17 @@ export function DataTablePagination<TData extends object>({
   className,
   ...props
 }: DataTablePaginationProps<TData>) {
-  const state = getPaginationState(table)
-  const navProps = useKeepFocusInPagination(state.page)
-  if (state.isEmpty) return null
-  const { pagination: labels, counts } = messages
+  const state = getPaginationState(table);
+  const navProps = useKeepFocusInPagination(state.page);
+  if (state.isEmpty) return null;
+  const { pagination: labels, counts } = messages;
 
   return (
     <div
       data-slot="data-table-pagination"
       className={cn(
         "flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-sm",
-        className
+        className,
       )}
       {...props}
     >
@@ -85,7 +85,7 @@ export function DataTablePagination<TData extends object>({
               onValueChange={(pageSize) => {
                 // Base UI calls this for the selected item too.
                 if (pageSize !== null && pageSize !== state.pageSize) {
-                  table.setPagination({ pageIndex: 0, pageSize })
+                  table.setPagination({ pageIndex: 0, pageSize });
                 }
               }}
             >
@@ -117,7 +117,7 @@ export function DataTablePagination<TData extends object>({
           <span
             className={cn(
               "font-medium tabular-nums",
-              state.pageCount !== undefined && "sm:hidden"
+              state.pageCount !== undefined && "sm:hidden",
             )}
           >
             {counts.page(state.page, state.pageCount)}
@@ -169,7 +169,7 @@ export function DataTablePagination<TData extends object>({
                       <span className="sr-only">{labels.morePages}</span>
                     </span>
                   </li>
-                )
+                ),
               )}
             <li>
               <Button
@@ -199,5 +199,5 @@ export function DataTablePagination<TData extends object>({
         </nav>
       )}
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { LandmarkIcon } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { LandmarkIcon } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -12,9 +12,7 @@ export default function NotFound() {
         <h1 className="text-4xl font-bold tabular-nums">404</h1>
         <p className="text-muted-foreground">This page doesn&apos;t exist.</p>
       </div>
-      <Button render={<Link href="/" />}>
-        Về trang chủ
-      </Button>
+      <Button render={<Link href="/" />}>Về trang chủ</Button>
     </div>
-  )
+  );
 }

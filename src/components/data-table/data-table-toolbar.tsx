@@ -1,36 +1,36 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   enTableMessages,
   type DataTableInstance,
   type DataTableRow,
   type TableMessages,
-} from "@querycn/table-react"
-import { RefreshCwIcon } from "lucide-react"
+} from "@querycn/table-react";
+import { RefreshCwIcon } from "lucide-react";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
-import { DataTableResetFiltersButton } from "@/components/data-table/data-table-reset-filters-button"
-import { DataTableSelectionBar } from "@/components/data-table/data-table-selection-bar"
-import { DataTableViewOptions } from "@/components/data-table/data-table-view-options"
-import type { CellEditors } from "@/components/data-table/data-table-cell-editors"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
+import { DataTableResetFiltersButton } from "@/components/data-table/data-table-reset-filters-button";
+import { DataTableSelectionBar } from "@/components/data-table/data-table-selection-bar";
+import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
+import type { CellEditors } from "@/components/data-table/data-table-cell-editors";
 
 export interface DataTableToolbarProps<TData extends object> extends Omit<
   React.ComponentProps<"div">,
   "children"
 > {
-  table: DataTableInstance<TData>
-  messages?: TableMessages
+  table: DataTableInstance<TData>;
+  messages?: TableMessages;
   /** The app's own controls: a search box, `FilterBuilder`, `FilterChips`… */
-  children?: React.ReactNode
+  children?: React.ReactNode;
   /** Shows a reload button. */
-  onRefresh?: () => void
-  isRefreshing?: boolean
+  onRefresh?: () => void;
+  isRefreshing?: boolean;
   /** Actions for the selected rows, in a bar floating over the table while some are. */
-  selectionActions?: (rows: DataTableRow<TData>[]) => React.ReactNode
+  selectionActions?: (rows: DataTableRow<TData>[]) => React.ReactNode;
   /** Editors by `meta.edit.type` for Bulk edit; pass the ones `DataTable` has. */
-  cellEditors?: CellEditors
+  cellEditors?: CellEditors;
 }
 
 /**
@@ -76,12 +76,12 @@ export function DataTableToolbar<TData extends object>({
                 // Pending, not disabled: it keeps focus.
                 aria-disabled={isRefreshing || undefined}
                 onClick={() => {
-                  if (!isRefreshing) onRefresh()
+                  if (!isRefreshing) onRefresh();
                 }}
               >
                 <RefreshCwIcon
                   className={cn(
-                    isRefreshing && "animate-spin motion-reduce:animate-none"
+                    isRefreshing && "animate-spin motion-reduce:animate-none",
                   )}
                 />
               </Button>
@@ -97,5 +97,5 @@ export function DataTableToolbar<TData extends object>({
         cellEditors={cellEditors}
       />
     </div>
-  )
+  );
 }

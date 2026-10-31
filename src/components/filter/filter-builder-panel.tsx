@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useFilter } from "@querycn/filter-react"
-import { PlusIcon } from "lucide-react"
+import * as React from "react";
+import { useFilter } from "@querycn/filter-react";
+import { PlusIcon } from "lucide-react";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
-import { FilterJoinSelect } from "@/components/filter/filter-join-select"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
+import { FilterJoinSelect } from "@/components/filter/filter-join-select";
 import {
   FilterRuleRow,
   type FilterRuleRowProps,
-} from "@/components/filter/filter-rule-row"
+} from "@/components/filter/filter-rule-row";
 
 function lostFocus() {
-  const active = document.activeElement
+  const active = document.activeElement;
   return (
     !active ||
     active === document.body ||
     !active.isConnected ||
     (active as HTMLButtonElement).disabled === true
-  )
+  );
 }
 
 export interface FilterBuilderPanelProps {
-  valueInput?: FilterRuleRowProps["valueInput"]
+  valueInput?: FilterRuleRowProps["valueInput"];
   /** Offers AND/OR on the second rule. Defaults to `true`; otherwise rules keep the current join. */
-  allowJoinToggle?: boolean
+  allowJoinToggle?: boolean;
   /** Runs after Apply, e.g. to close a popover. */
-  onApply?: () => void
-  className?: string
+  onApply?: () => void;
+  className?: string;
 }
 
 /** The draft rules with Add, Clear all and Apply. Enter in a text field applies. */
@@ -47,27 +47,27 @@ export function FilterBuilderPanel({
     setJoin,
     apply,
     reset,
-  } = useFilter()
-  const listRef = React.useRef<HTMLDivElement>(null)
-  const addRef = React.useRef<HTMLButtonElement>(null)
-  const added = React.useRef(false)
-  const ids = state.rules.map((rule) => rule.id).join()
-  const previousIds = React.useRef(ids)
+  } = useFilter();
+  const listRef = React.useRef<HTMLDivElement>(null);
+  const addRef = React.useRef<HTMLButtonElement>(null);
+  const added = React.useRef(false);
+  const ids = state.rules.map((rule) => rule.id).join();
+  const previousIds = React.useRef(ids);
 
   React.useEffect(() => {
-    if (ids === previousIds.current) return
-    previousIds.current = ids
+    if (ids === previousIds.current) return;
+    previousIds.current = ids;
     if (added.current) {
-      added.current = false
+      added.current = false;
       const rows = listRef.current?.querySelectorAll(
-        "[data-slot=filter-rule-row]"
-      )
-      rows?.[rows.length - 1]?.querySelector("button")?.focus()
+        "[data-slot=filter-rule-row]",
+      );
+      rows?.[rows.length - 1]?.querySelector("button")?.focus();
     } else if (lostFocus()) {
       // A removed row, Clear all, or Apply (rows remount under new ids) dropped it.
-      addRef.current?.focus()
+      addRef.current?.focus();
     }
-  }, [ids])
+  }, [ids]);
 
   return (
     <form
@@ -75,11 +75,11 @@ export function FilterBuilderPanel({
       aria-label={messages.actions.open}
       className={cn("flex flex-col gap-3", className)}
       onSubmit={(event) => {
-        event.preventDefault()
+        event.preventDefault();
         // React events cross portals, so an enclosing form would submit too.
-        event.stopPropagation()
-        apply()
-        onApply?.()
+        event.stopPropagation();
+        apply();
+        onApply?.();
       }}
     >
       {state.rules.length === 0 ? (
@@ -117,8 +117,8 @@ export function FilterBuilderPanel({
           size="sm"
           disabled={!canAddRule}
           onClick={() => {
-            added.current = true
-            addRule()
+            added.current = true;
+            addRule();
           }}
         >
           <PlusIcon />
@@ -139,5 +139,5 @@ export function FilterBuilderPanel({
         </Button>
       </div>
     </form>
-  )
+  );
 }

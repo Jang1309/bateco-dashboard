@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import type { DataTableInstance, TableMessages } from "@querycn/table-react"
+import * as React from "react";
+import type { DataTableInstance, TableMessages } from "@querycn/table-react";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -11,34 +11,34 @@ import {
   PinIcon,
   PinOffIcon,
   XIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { DataTableColumnColorMenu } from "@/components/data-table/data-table-column-color-menu"
-import { getColumnLabel } from "@/components/data-table/column-label"
+} from "@/components/ui/dropdown-menu";
+import { DataTableColumnColorMenu } from "@/components/data-table/data-table-column-color-menu";
+import { getColumnLabel } from "@/components/data-table/column-label";
 import {
   fitColumns,
   pinColumn,
-} from "@/components/data-table/column-layout-actions"
+} from "@/components/data-table/column-layout-actions";
 
 type Column<TData extends object> = ReturnType<
   DataTableInstance<TData>["getAllLeafColumns"]
->[number]
+>[number];
 
 interface ColumnMenuProps<TData extends object> {
-  table: DataTableInstance<TData>
-  column: Column<TData>
-  messages: TableMessages
+  table: DataTableInstance<TData>;
+  column: Column<TData>;
+  messages: TableMessages;
   /** Opens a color picker, e.g. `useColumnColorPicker`'s `open`. */
-  onCustomColor: () => void
+  onCustomColor: () => void;
 }
 
 /** Pin, fit and color: the layout items of a column's menu, in its header and in the Columns list. */
@@ -48,8 +48,8 @@ export function DataTableColumnLayoutItems<TData extends object>({
   messages,
   onCustomColor,
 }: ColumnMenuProps<TData>) {
-  const pinned = column.getIsPinned()
-  const canPin = column.getCanPin()
+  const pinned = column.getIsPinned();
+  const canPin = column.getCanPin();
   return (
     <>
       <DropdownMenuItem
@@ -87,7 +87,7 @@ export function DataTableColumnLayoutItems<TData extends object>({
         onCustomColor={onCustomColor}
       />
     </>
-  )
+  );
 }
 
 /**
@@ -101,12 +101,12 @@ export function DataTableColumnMenu<TData extends object>({
   className,
   ...props
 }: ColumnMenuProps<TData> & {
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
-  className?: string
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  className?: string;
 }) {
-  const { column, messages } = props
-  const sorted = column.getIsSorted()
+  const { column, messages } = props;
+  const sorted = column.getIsSorted();
   return (
     <DropdownMenu open={open} onOpenChange={(next) => onOpenChange?.(next)}>
       <DropdownMenuTrigger
@@ -117,7 +117,7 @@ export function DataTableColumnMenu<TData extends object>({
             aria-label={messages.columns.options(getColumnLabel(column))}
             className={cn(
               "bg-background opacity-0 group-hover/header:opacity-100 focus-visible:opacity-100 aria-expanded:opacity-100 pointer-coarse:opacity-100",
-              className
+              className,
             )}
           />
         }
@@ -163,5 +163,5 @@ export function DataTableColumnMenu<TData extends object>({
         )}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

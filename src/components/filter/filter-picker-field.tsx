@@ -1,35 +1,35 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useDirection } from "@base-ui/react/direction-provider"
-import { useFilterActions } from "@querycn/filter-react"
-import { ArrowRightIcon, type LucideIcon } from "lucide-react"
+import * as React from "react";
+import { useDirection } from "@base-ui/react/direction-provider";
+import { useFilterActions } from "@querycn/filter-react";
+import { ArrowRightIcon, type LucideIcon } from "lucide-react";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 import {
   pickerRangeFieldClassName,
   pickerRangeSideClassName,
-} from "@/components/filter/filter-picker-field-parts"
+} from "@/components/filter/filter-picker-field-parts";
 
 /** What a picker's popover shows; `onOk` closes it (or moves on to a range's end). */
 export type PickerPanel = (
   value: string,
   onChange: (value: string) => void,
-  onOk: () => void
-) => React.ReactNode
+  onOk: () => void,
+) => React.ReactNode;
 
 interface PickerFieldBaseProps {
-  id?: string
-  label: string
-  format: (value: string) => string
-  icon: LucideIcon
-  panel: PickerPanel
+  id?: string;
+  label: string;
+  format: (value: string) => string;
+  icon: LucideIcon;
+  panel: PickerPanel;
 }
 
 /** Now and OK under a picker. */
@@ -38,11 +38,11 @@ export function PickerFooter({
   onOk,
   okDisabled,
 }: {
-  onNow: () => void
-  onOk: () => void
-  okDisabled: boolean
+  onNow: () => void;
+  onOk: () => void;
+  okDisabled: boolean;
 }) {
-  const { messages } = useFilterActions()
+  const { messages } = useFilterActions();
   return (
     <div className="flex items-center justify-between gap-2 border-t p-1.5">
       <Button variant="link" size="sm" className="h-7 px-1.5" onClick={onNow}>
@@ -52,7 +52,7 @@ export function PickerFooter({
         {messages.actions.ok}
       </Button>
     </div>
-  )
+  );
 }
 
 /** A button showing the value, opening `panel` in a popover. */
@@ -67,13 +67,13 @@ export function PickerField({
   panel,
   className,
 }: PickerFieldBaseProps & {
-  value: string
-  onChange: (value: string) => void
-  placeholder: string
-  className?: string
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  className?: string;
 }) {
-  const dir = useDirection()
-  const [open, setOpen] = React.useState(false)
+  const dir = useDirection();
+  const [open, setOpen] = React.useState(false);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
@@ -84,7 +84,7 @@ export function PickerField({
             size="sm"
             className={cn(
               "justify-between text-sm font-normal tabular-nums",
-              className
+              className,
             )}
           />
         }
@@ -99,10 +99,10 @@ export function PickerField({
         {panel(value, onChange, () => setOpen(false))}
       </PopoverContent>
     </Popover>
-  )
+  );
 }
 
-type Side = "from" | "to"
+type Side = "from" | "to";
 
 /** Both ends of a range in one field; OK on the start moves on to the end. */
 export function RangePickerField({
@@ -115,13 +115,13 @@ export function RangePickerField({
   panel,
   sideClassName,
 }: PickerFieldBaseProps & {
-  value: [string, string]
-  onChange: (value: [string, string]) => void
-  sideClassName?: string
+  value: [string, string];
+  onChange: (value: [string, string]) => void;
+  sideClassName?: string;
 }) {
-  const dir = useDirection()
-  const { messages } = useFilterActions()
-  const [open, setOpen] = React.useState<Side | null>(null)
+  const dir = useDirection();
+  const { messages } = useFilterActions();
+  const [open, setOpen] = React.useState<Side | null>(null);
 
   const side = (name: Side, value: string, other: string) => (
     <Popover
@@ -152,11 +152,11 @@ export function RangePickerField({
         {panel(
           value,
           (next) => onChange(name === "from" ? [next, to] : [from, next]),
-          () => setOpen(name === "from" ? "to" : null)
+          () => setOpen(name === "from" ? "to" : null),
         )}
       </PopoverContent>
     </Popover>
-  )
+  );
 
   return (
     <div className={pickerRangeFieldClassName}>
@@ -168,5 +168,5 @@ export function RangePickerField({
       {side("to", to, from)}
       <Icon aria-hidden className="size-4 shrink-0 text-muted-foreground" />
     </div>
-  )
+  );
 }

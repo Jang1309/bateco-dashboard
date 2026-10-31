@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useDirection } from "@base-ui/react/direction-provider"
-import type { SelectOption } from "@querycn/filter-core"
-import { useFilterActions } from "@querycn/filter-react"
-import { CheckIcon, ChevronsUpDownIcon } from "lucide-react"
+import * as React from "react";
+import { useDirection } from "@base-ui/react/direction-provider";
+import type { SelectOption } from "@querycn/filter-core";
+import { useFilterActions } from "@querycn/filter-react";
+import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 
-import { cn } from "cn"
-import { Button } from "@/components/ui/button"
+import { cn } from "cn";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -15,33 +15,33 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
 export interface FilterComboboxProps {
-  id?: string
-  "aria-label": string
+  id?: string;
+  "aria-label": string;
   /** Trigger content; `undefined` shows the placeholder. */
-  label: React.ReactNode | undefined
-  placeholder: string
+  label: React.ReactNode | undefined;
+  placeholder: string;
   /** Already filtered for `search`. */
-  options: readonly SelectOption[]
-  selected: readonly string[]
+  options: readonly SelectOption[];
+  selected: readonly string[];
   /** Picks toggle values and the list stays open. */
-  multiple?: boolean
-  onSelectedChange: (values: string[]) => void
-  search: string
-  onSearchChange: (search: string) => void
-  emptyText: string
-  loading?: boolean
-  error?: boolean
-  onRetry?: () => void
-  onOpenChange?: (open: boolean) => void
-  className?: string
+  multiple?: boolean;
+  onSelectedChange: (values: string[]) => void;
+  search: string;
+  onSearchChange: (search: string) => void;
+  emptyText: string;
+  loading?: boolean;
+  error?: boolean;
+  onRetry?: () => void;
+  onOpenChange?: (open: boolean) => void;
+  className?: string;
 }
 
 /** A searchable select of one or several values; the caller does the filtering. */
@@ -63,15 +63,15 @@ export function FilterCombobox({
   onOpenChange,
   className,
 }: FilterComboboxProps) {
-  const dir = useDirection()
-  const { messages } = useFilterActions()
-  const [open, setOpen] = React.useState(false)
+  const dir = useDirection();
+  const { messages } = useFilterActions();
+  const [open, setOpen] = React.useState(false);
   const handleOpenChange = (next: boolean) => {
-    setOpen(next)
+    setOpen(next);
     // Cleared on open, not close, so the list doesn't jump during the exit animation.
-    if (next) onSearchChange("")
-    onOpenChange?.(next)
-  }
+    if (next) onSearchChange("");
+    onOpenChange?.(next);
+  };
 
   return (
     <Popover open={open} onOpenChange={handleOpenChange}>
@@ -86,7 +86,7 @@ export function FilterCombobox({
             aria-label={ariaLabel}
             className={cn(
               "w-40 justify-between text-sm font-normal",
-              className
+              className,
             )}
           />
         }
@@ -94,7 +94,7 @@ export function FilterCombobox({
         <span
           className={cn(
             "truncate",
-            label === undefined && "text-muted-foreground"
+            label === undefined && "text-muted-foreground",
           )}
         >
           {label ?? placeholder}
@@ -132,7 +132,7 @@ export function FilterCombobox({
             )}
             <CommandGroup>
               {options.map((option) => {
-                const checked = selected.includes(option.value)
+                const checked = selected.includes(option.value);
                 return (
                   <CommandItem
                     key={option.value}
@@ -146,11 +146,11 @@ export function FilterCombobox({
                         onSelectedChange(
                           checked
                             ? selected.filter((v) => v !== option.value)
-                            : [...selected, option.value]
-                        )
+                            : [...selected, option.value],
+                        );
                       } else {
-                        onSelectedChange([option.value])
-                        handleOpenChange(false)
+                        onSelectedChange([option.value]);
+                        handleOpenChange(false);
                       }
                     }}
                   >
@@ -160,7 +160,7 @@ export function FilterCombobox({
                         className={cn(
                           "flex size-4 shrink-0 items-center justify-center rounded-[4px] border border-input",
                           checked &&
-                            "border-primary bg-primary text-primary-foreground"
+                            "border-primary bg-primary text-primary-foreground",
                         )}
                       >
                         {checked && <CheckIcon className="size-3" />}
@@ -168,12 +168,12 @@ export function FilterCombobox({
                     )}
                     <span className="truncate">{option.label}</span>
                   </CommandItem>
-                )
+                );
               })}
             </CommandGroup>
           </CommandList>
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

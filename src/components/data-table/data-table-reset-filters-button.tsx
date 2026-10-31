@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useAppliedFilter, useFilterActions } from "@querycn/filter-react"
+import * as React from "react";
+import { useAppliedFilter, useFilterActions } from "@querycn/filter-react";
 import {
   enTableMessages,
   type DataTableInstance,
   type TableMessages,
-} from "@querycn/table-react"
-import { XIcon } from "lucide-react"
+} from "@querycn/table-react";
+import { XIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { useFocusToolbarOnUnmount } from "@/components/data-table/use-focus-toolbar-on-unmount"
+import { Button } from "@/components/ui/button";
+import { useFocusToolbarOnUnmount } from "@/components/data-table/use-focus-toolbar-on-unmount";
 
 export interface DataTableResetFiltersButtonProps<TData extends object> {
-  table: DataTableInstance<TData>
-  messages?: TableMessages
-  className?: string
+  table: DataTableInstance<TData>;
+  messages?: TableMessages;
+  className?: string;
 }
 
 /**
@@ -25,16 +25,16 @@ export interface DataTableResetFiltersButtonProps<TData extends object> {
  * any other filter change.
  */
 export function DataTableResetFiltersButton<TData extends object>(
-  props: DataTableResetFiltersButtonProps<TData>
+  props: DataTableResetFiltersButtonProps<TData>,
 ) {
-  const { activeCount } = useAppliedFilter()
-  const meta = props.table.options.meta
-  const clearSearch = () => meta?.setSearch("")
+  const { activeCount } = useAppliedFilter();
+  const meta = props.table.options.meta;
+  const clearSearch = () => meta?.setSearch("");
   if (activeCount > 0) {
-    return <ResetFilterAndSearch {...props} clearSearch={clearSearch} />
+    return <ResetFilterAndSearch {...props} clearSearch={clearSearch} />;
   }
-  if (!meta?.search) return null
-  return <ResetButton {...props} onReset={clearSearch} />
+  if (!meta?.search) return null;
+  return <ResetButton {...props} onReset={clearSearch} />;
 }
 
 // Only under a provider: `useFilterActions` needs one.
@@ -42,16 +42,16 @@ function ResetFilterAndSearch<TData extends object>({
   clearSearch,
   ...props
 }: DataTableResetFiltersButtonProps<TData> & { clearSearch: () => void }) {
-  const { reset } = useFilterActions()
+  const { reset } = useFilterActions();
   return (
     <ResetButton
       {...props}
       onReset={() => {
-        reset()
-        clearSearch()
+        reset();
+        clearSearch();
       }}
     />
-  )
+  );
 }
 
 function ResetButton<TData extends object>({
@@ -59,7 +59,7 @@ function ResetButton<TData extends object>({
   className,
   onReset,
 }: DataTableResetFiltersButtonProps<TData> & { onReset: () => void }) {
-  const ref = useFocusToolbarOnUnmount<HTMLButtonElement>()
+  const ref = useFocusToolbarOnUnmount<HTMLButtonElement>();
   return (
     <Button
       ref={ref}
@@ -71,5 +71,5 @@ function ResetButton<TData extends object>({
       <XIcon />
       {messages.actions.clearFilters}
     </Button>
-  )
+  );
 }

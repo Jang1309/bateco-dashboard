@@ -1,13 +1,13 @@
-import * as React from "react"
-import { useVirtualizer } from "@tanstack/react-virtual"
+import * as React from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 export interface UseVirtualRowsOptions {
-  enabled: boolean
-  count: number
+  enabled: boolean;
+  count: number;
   /** The row's id at an index, so a measured height follows the row when it moves. */
-  getRowId: (index: number) => string
-  scrollRef: React.RefObject<HTMLElement | null>
-  estimateRowHeight: number
+  getRowId: (index: number) => string;
+  scrollRef: React.RefObject<HTMLElement | null>;
+  estimateRowHeight: number;
 }
 
 /**
@@ -30,16 +30,16 @@ export function useVirtualRows({
     estimateSize: () => estimateRowHeight,
     getItemKey: getRowId,
     overscan: 10,
-  })
-  if (!enabled) return null
-  const items = virtualizer.getVirtualItems()
+  });
+  if (!enabled) return null;
+  const items = virtualizer.getVirtualItems();
   return {
     items,
     before: items[0]?.start ?? 0,
     after: virtualizer.getTotalSize() - (items.at(-1)?.end ?? 0),
     /** The row's ref; the row needs `data-index`. */
     measureRow: virtualizer.measureElement,
-  }
+  };
 }
 
-export type VirtualRows = NonNullable<ReturnType<typeof useVirtualRows>>
+export type VirtualRows = NonNullable<ReturnType<typeof useVirtualRows>>;

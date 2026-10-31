@@ -1,17 +1,14 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { NavMain } from "@/components/layout/nav-main"
+import Image from "next/image";
+import Link from "next/link";
+import { NavMain } from "@/components/layout/nav-main";
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
-} from "@/components/ui/sidebar"
-import {
-  GitCompareArrowsIcon,
-  LayoutDashboardIcon,
-} from "lucide-react"
+} from "@/components/ui/sidebar";
+import { GitCompareArrowsIcon, LayoutDashboardIcon } from "lucide-react";
 
 const data = {
   navMain: [
@@ -25,7 +22,7 @@ const data = {
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -49,5 +46,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} label="Điều hướng" />
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

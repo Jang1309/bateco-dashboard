@@ -39,5 +39,7 @@ export default async function Page({
       return { year, overview, breakdown };
     }),
   );
-  return <SoSanhNamView data={data} available={available} maxYears={MAX_YEARS} />;
+  return (
+    <SoSanhNamView data={data} available={available} maxYears={MAX_YEARS} />
+  );
 }
