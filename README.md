@@ -6,11 +6,12 @@ Dashboard doanh thu Bateco theo Figma: chỉ tiêu, kỳ vọng, gói thầu và
 
 | Route | Mô tả |
 |------|--------|
-| `/dashboard` | Tổng quan doanh thu (KPI, charts, bảng giám đốc) |
-| `/directors/[id]` | Chi tiết giám đốc / chi nhánh |
-| `/coming-soon` | Stub cho mục sidebar chưa có design |
-
-Skeleton bảng: `src/app/(dashboard)/dashboard/loading.tsx`. Empty search: gõ từ khóa không khớp trên bảng overview.
+| `/` | Tổng quan doanh thu |
+| `/so-sanh-nam` | So sánh các năm |
+| `/so-sanh-nhan-su` | So sánh nhân sự |
+| `/phu-trach/[id]` | Chi tiết phụ trách |
+| `/thuat-ngu` | Thuật ngữ |
+| `/sap-ra-mat` | Stub cho mục chưa có |
 
 ## Tech
 

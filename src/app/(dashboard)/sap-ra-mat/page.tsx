@@ -1,10 +1,10 @@
 import { Suspense } from "react"
-import { ComingSoonView } from "@/views/coming-soon"
+import { SapRaMatView } from "@/views/sap-ra-mat"
 
 export default function Page() {
   return (
     <Suspense fallback={null}>
-      <ComingSoonView />
+      <SapRaMatView />
     </Suspense>
   )
 }

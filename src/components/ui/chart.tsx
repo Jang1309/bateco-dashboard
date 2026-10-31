@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { flushSync } from "react-dom"
 import { cn } from "cn"
 import * as RechartsPrimitive from "recharts"
 import type { TooltipValueType } from "recharts"
@@ -57,10 +58,37 @@ function ChartContainer({
 }) {
   const uniqueId = React.useId()
   const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`
+  // chỉ vẽ khi khung lọt vào màn hình → animation chạy lúc người dùng nhìn thấy,
+  // không chạy ngầm ở phần chưa cuộn tới; khi in thì vẽ hết để bản PDF không trống
+  const ref = React.useRef<HTMLDivElement>(null)
+  const [inView, setInView] = React.useState(false)
+  React.useEffect(() => {
+    const el = ref.current
+    if (!el || inView) return
+    const show = () => setInView(true)
+    // nút "PDF / In" (printReport) gắn class printing rồi phát resize, chờ chart vẽ xong mới in
+    const onResize = () =>
+      document.documentElement.classList.contains("printing") && show()
+    // Ctrl+P của trình duyệt: beforeprint chạy đồng bộ ngay trước khi in nên phải render ngay
+    const onBeforePrint = () => flushSync(show)
+    const io = new IntersectionObserver(
+      ([e]) => e?.isIntersecting && show(),
+      { rootMargin: "0px 0px -10% 0px" }
+    )
+    io.observe(el)
+    window.addEventListener("resize", onResize)
+    window.addEventListener("beforeprint", onBeforePrint)
+    return () => {
+      io.disconnect()
+      window.removeEventListener("resize", onResize)
+      window.removeEventListener("beforeprint", onBeforePrint)
+    }
+  }, [inView])
 
   return (
     <ChartContext.Provider value={{ config }}>
       <div
+        ref={ref}
         data-slot="chart"
         data-chart={chartId}
         className={cn(
@@ -70,12 +98,14 @@ function ChartContainer({
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer
-          initialDimension={initialDimension}
-          minWidth={0}
-        >
-          {children}
-        </RechartsPrimitive.ResponsiveContainer>
+        {inView && (
+          <RechartsPrimitive.ResponsiveContainer
+            initialDimension={initialDimension}
+            minWidth={0}
+          >
+            {children}
+          </RechartsPrimitive.ResponsiveContainer>
+        )}
       </div>
     </ChartContext.Provider>
   )

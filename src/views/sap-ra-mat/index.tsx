@@ -18,7 +18,7 @@ const LABELS: Record<string, string> = {
   "ho-tro": "Hỗ trợ",
 }
 
-export function ComingSoonView() {
+export function SapRaMatView() {
   const params = useSearchParams()
   const from = params.get("from") ?? ""
   const title = LABELS[from] ?? "Tính năng"

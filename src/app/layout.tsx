@@ -6,7 +6,8 @@ import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  // vietnamese: không có subset này các chữ có dấu (ỷ, ạ, ₫…) rơi về font dự phòng
+  subsets: ["latin", "latin-ext", "vietnamese"],
 });
 
 const geistMono = Geist_Mono({

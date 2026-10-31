@@ -21,3 +21,16 @@ export function formatVndShort(n: number) {
   if (abs >= 1_000_000) return `${sign}${(abs / 1_000_000).toFixed(0)}tr`
   return `${sign}${abs.toLocaleString("vi-VN")}`
 }
+
+/** Tỷ đồng, luôn 1 chữ số thập phân, vd 271,5 */
+export function formatTy(n: number) {
+  return (n / 1_000_000_000).toLocaleString("vi-VN", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  })
+}
+
+/** Phần trăm kiểu vi-VN: 45,6% */
+export function formatPct(n: number, digits = 1) {
+  return `${n.toLocaleString("vi-VN", { minimumFractionDigits: digits, maximumFractionDigits: digits })}%`
+}
