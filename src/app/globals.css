@@ -9,9 +9,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-mono: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,7 +49,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --font-serif: Inter, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --radius: 0.75rem;
   --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
   --tracking-tight: calc(var(--tracking-normal) - 0.025em);
@@ -73,6 +74,17 @@
   --shadow-opacity: var(--shadow-opacity);
   --color-shadow-color: var(--shadow-color);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-warning: var(--warning);
+  --color-warning-muted: var(--warning-muted);
+  --color-destructive-muted: var(--destructive-muted);
+  --color-neutral-muted: var(--neutral-muted);
+  --color-chart-plan: var(--chart-plan);
+  --color-chart-soft: var(--chart-soft);
+  --color-chart-danger: var(--chart-danger);
+  --color-chart-track: var(--chart-track);
+  --expo-out: linear(0 0%, 0.1684 2.66%, 0.3165 5.49%, 0.446 8.52%, 0.5581 11.78%, 0.6535 15.29%, 0.7341 19.11%, 0.8011 23.3%, 0.8557 27.93%, 0.8962 32.68%, 0.9283 38.01%, 0.9529 44.08%, 0.9711 51.14%, 0.9833 59.06%, 0.9915 68.74%, 1 100%);
 }
 
 :root {
@@ -109,9 +121,9 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --destructive-foreground: oklch(0.934 0.0315 5.5116);
-  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-mono: Inter, ui-sans-serif, sans-serif, system-ui;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --shadow-color: oklch(0 0 0);
   --shadow-opacity: 0;
   --shadow-blur: 0px;
@@ -135,67 +147,80 @@
     -50px 8px 10px -51px hsl(0 0% 0% / 0);
   --shadow-2xl: -50px -50px 0px -50px hsl(0 0% 0% / 0);
   --tracking-normal: 0em;
+  --success: #15803d;
+  --success-muted: #dcfce7;
+  --warning: #b45309;
+  --warning-muted: #fef3c7;
+  --destructive-muted: #fdecec;
+  --neutral-muted: #eef1f5;
+  --chart-plan: #9fb6d1;
+  --chart-soft: #7cc4eb;
+  --chart-danger: #c65b5b;
+  --chart-track: #dce5ef;
+  /* ngưỡng win rate: phân kỳ xanh (chắc) ↔ xám ↔ đỏ (rủi ro), đã chạy validate_palette */
+  --chart-win-high: #256abf;
+  --chart-win-mid: #aab3bf;
+  --chart-win-low: #e34948;
+  /* so sánh nhân sự: màu phân loại theo thứ tự cố định (đã chạy validate_palette cả 2 theme) */
+  --person-1: #2a78d6;
+  --person-2: #eb6834;
+  --person-3: #1baf7a;
+  --person-4: #eda100;
+  --person-5: #e87ba4;
 }
 
 .dark {
-  --background: oklch(0.968 0.0059 239.8195);
-  --foreground: oklch(0.3098 0.0748 248.9089);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.3098 0.0748 248.9089);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.3098 0.0748 248.9089);
+  --background: oklch(0.18 0.03 250);
+  --foreground: oklch(0.95 0.01 240);
+  --card: oklch(0.22 0.035 250);
+  --card-foreground: oklch(0.95 0.01 240);
+  --popover: oklch(0.22 0.035 250);
+  --popover-foreground: oklch(0.95 0.01 240);
   --primary: oklch(0.7347 0.1447 228.9136);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.3098 0.0748 248.9089);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.9352 0.0412 217.6616);
-  --muted-foreground: oklch(0.4186 0.0765 246.7831);
-  --accent: oklch(0.9352 0.0412 217.6616);
-  --accent-foreground: oklch(0.3098 0.0748 248.9089);
-  --destructive: oklch(0.5014 0.2027 23.8197);
-  --border: oklch(0.8761 0 0);
-  --input: oklch(1 0 0);
-  --ring: oklch(0.3098 0.0748 248.9089);
-  --chart-1: oklch(0.3098 0.0748 248.9089);
+  --primary-foreground: oklch(0.18 0.03 250);
+  --secondary: oklch(0.28 0.04 250);
+  --secondary-foreground: oklch(0.95 0.01 240);
+  --muted: oklch(0.28 0.04 250);
+  --muted-foreground: oklch(0.72 0.03 240);
+  --accent: oklch(0.28 0.04 250);
+  --accent-foreground: oklch(0.95 0.01 240);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(0.32 0.03 250);
+  --input: oklch(0.28 0.04 250);
+  --ring: oklch(0.7347 0.1447 228.9136);
+  --chart-1: oklch(0.85 0.04 220);
   --chart-2: oklch(0.7347 0.1447 228.9136);
-  --chart-3: oklch(0.8353 0.0553 213.7694);
-  --chart-4: oklch(0.963 0.0296 94.3436);
-  --chart-5: oklch(0.4694 0.0568 228.3984);
-  --sidebar: oklch(0.3098 0.0748 248.9089);
-  --sidebar-foreground: oklch(1 0 0);
+  --chart-3: oklch(0.65 0.08 220);
+  --chart-4: oklch(0.8 0.1 145);
+  --chart-5: oklch(0.55 0.06 250);
+  --sidebar: oklch(0.16 0.035 250);
+  --sidebar-foreground: oklch(0.95 0.01 240);
   --sidebar-primary: oklch(0.7347 0.1447 228.9136);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.9352 0.0412 217.6616);
-  --sidebar-accent-foreground: oklch(0.3098 0.0748 248.9089);
-  --sidebar-border: oklch(0.275 0 0);
-  --sidebar-ring: oklch(0.556 0 0);
-  --destructive-foreground: oklch(0.934 0.0315 5.5116);
+  --sidebar-primary-foreground: oklch(0.16 0.035 250);
+  --sidebar-accent: oklch(0.26 0.04 250);
+  --sidebar-accent-foreground: oklch(0.95 0.01 240);
+  --sidebar-border: oklch(0.28 0.03 250);
+  --sidebar-ring: oklch(0.7347 0.1447 228.9136);
+  --destructive-foreground: oklch(0.95 0.02 25);
   --radius: 0.75rem;
-  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-mono: Inter, ui-sans-serif, sans-serif, system-ui;
-  --shadow-color: oklch(0 0 0);
-  --shadow-opacity: 0;
-  --shadow-blur: 0px;
-  --shadow-spread: -50px;
-  --shadow-offset-x: -50px;
-  --shadow-offset-y: -50px;
-  --letter-spacing: 0em;
-  --spacing: 0.25rem;
-  --shadow-2xs: -50px -50px 0px -50px hsl(0 0% 0% / 0);
-  --shadow-xs: -50px -50px 0px -50px hsl(0 0% 0% / 0);
-  --shadow-sm:
-    -50px -50px 0px -50px hsl(0 0% 0% / 0), -50px 1px 2px -51px hsl(0 0% 0% / 0);
-  --shadow:
-    -50px -50px 0px -50px hsl(0 0% 0% / 0), -50px 1px 2px -51px hsl(0 0% 0% / 0);
-  --shadow-md:
-    -50px -50px 0px -50px hsl(0 0% 0% / 0), -50px 2px 4px -51px hsl(0 0% 0% / 0);
-  --shadow-lg:
-    -50px -50px 0px -50px hsl(0 0% 0% / 0), -50px 4px 6px -51px hsl(0 0% 0% / 0);
-  --shadow-xl:
-    -50px -50px 0px -50px hsl(0 0% 0% / 0),
-    -50px 8px 10px -51px hsl(0 0% 0% / 0);
-  --shadow-2xl: -50px -50px 0px -50px hsl(0 0% 0% / 0);
+  --success: oklch(0.78 0.15 150);
+  --success-muted: oklch(0.32 0.06 150);
+  --warning: oklch(0.82 0.13 80);
+  --warning-muted: oklch(0.34 0.06 80);
+  --destructive-muted: oklch(0.32 0.08 25);
+  --neutral-muted: oklch(0.26 0.035 250);
+  --chart-plan: oklch(0.55 0.05 250);
+  --chart-soft: oklch(0.55 0.1 228);
+  --chart-danger: oklch(0.65 0.15 25);
+  --chart-track: oklch(0.34 0.035 250);
+  --chart-win-high: #5b9be6;
+  --chart-win-mid: #5d6878;
+  --chart-win-low: #ec6a62;
+  --person-1: #3987e5;
+  --person-2: #d95926;
+  --person-3: #199e70;
+  --person-4: #c98500;
+  --person-5: #d55181;
 }
 
 @layer base {
@@ -209,6 +234,29 @@
   html {
     @apply font-sans;
   }
+  ::view-transition-group(root) {
+    animation-timing-function: var(--expo-out);
+  }
+  ::view-transition-old(root),.dark::view-transition-old(root) {
+    animation: none;
+    animation-fill-mode: both;
+    z-index: -1;
+  }
+  ::view-transition-new(root) {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><filter id="blur"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="20" cy="20" r="18" fill="white" filter="url(%23blur)"/></svg>') center / 0 no-repeat;
+    animation: scale 1s;
+    animation-fill-mode: both;
+  }
+  .dark::view-transition-new(root) {
+    animation: scale 1s;
+    animation-fill-mode: both;
+  }
+
+@keyframes scale {
+  to {
+    mask-size: 200vmax;
+    }
+  }
 }
 
 @keyframes marquee {
@@ -220,14 +268,41 @@
   }
 }
 
+/* Icon nét mảnh cho giao diện thanh thoát hơn */
+.lucide {
+  stroke-width: 1.5;
+}
+
+/* Thanh chart mọc từ trái sang khi tải trang */
+@keyframes bar-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes bar-rise {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @utility animate-marquee {
   animation: marquee 40s linear infinite;
 }
 
+/* Desktop: thiết kế chuẩn ở 1440px (1rem = 16px), co giãn đúng tỉ lệ theo màn hình
+   để bố cục giữ nguyên ở mọi độ rộng; chặn 18px để màn rất lớn không phóng quá to. */
 html {
-  font-size: 0.9vw;
+  font-size: min(calc(100vw / 90), 18px);
 }
 
+/* Mobile (xsm): thiết kế chuẩn ở 375px (1rem = 16px) */
 @media (max-width: 639px) {
   html {
     font-size: 4.26666667vw;
@@ -317,4 +392,69 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Ẩn trên Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* Bản in / Lưu PDF. Nút "Xuất báo cáo → PDF" thêm class .printing lên <html> TRƯỚC khi in để
+   trang dựng lại ngay trên màn hình đúng khổ A4 ngang (277mm) và chart/bảng tính lại kích thước
+   bằng JS; nhờ vậy bản in khớp bố cục, không bị tràn/đè. @media print giữ cho cả Ctrl+P. */
+/* /100 thay vì /90: bản in nhỏ hơn màn hình một chút để mỗi trang chứa trọn hàng chart */
+html.printing {
+  font-size: calc(277mm / 100) !important;
+}
+html.printing body,
+html.printing [data-slot="sidebar-inset"] {
+  width: 277mm;
+  background: #fff !important;
+}
+html.printing [data-slot="sidebar-gap"],
+html.printing [data-slot="sidebar-container"],
+html.printing [data-slot="sidebar-inset"] > header,
+html.printing [data-slot="data-table-toolbar"],
+html.printing [data-slot="data-table-pagination"],
+html.printing [data-slot="carousel-previous"],
+html.printing [data-slot="carousel-next"],
+html.printing .print\:hidden {
+  display: none !important;
+}
+html.printing [data-slot="data-table"] {
+  max-height: none !important;
+  overflow: visible !important;
+}
+/* tắt hiệu ứng xuất hiện để không in ra lúc card còn mờ */
+html.printing * {
+  animation: none !important;
+  transition: none !important;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  /* giữ màu chart, badge, nền thẻ KPI */
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  [data-slot="sidebar-gap"],
+  [data-slot="sidebar-container"],
+  [data-slot="sidebar-inset"] > header,
+  [data-slot="data-table-toolbar"],
+  [data-slot="data-table-pagination"],
+  [data-slot="carousel-previous"],
+  [data-slot="carousel-next"] {
+    display: none !important;
+  }
+  [data-slot="data-table"] {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  /* không cắt đôi card giữa hai trang giấy */
+  section {
+    break-inside: avoid;
+  }
 }

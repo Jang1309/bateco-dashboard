@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="178" height="24" viewBox="0 0 178 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Bullet" clip-path="url(#clip0_0_32)">
+<path id="Vector" d="M172 2H6C2.68629 2 0 4.68629 0 8V16C0 19.3137 2.68629 22 6 22H172C175.314 22 178 19.3137 178 16V8C178 4.68629 175.314 2 172 2Z" fill="#EEF1F5"/>
+<path id="Vector_2" d="M127.5 2H6C2.68629 2 0 4.68629 0 8V16C0 19.3137 2.68629 22 6 22H127.5C130.814 22 133.5 19.3137 133.5 16V8C133.5 4.68629 130.814 2 127.5 2Z" fill="#B4D6E4" fill-opacity="0.65"/>
+<path id="Vector_3" d="M134.4 7H5C2.23858 7 0 9.23858 0 12C0 14.7614 2.23858 17 5 17H134.4C137.161 17 139.4 14.7614 139.4 12C139.4 9.23858 137.161 7 134.4 7Z" fill="#162E4D"/>
+<path id="Vector_4" d="M149.8 1.5C149.8 0.671573 149.128 0 148.3 0C147.472 0 146.8 0.671573 146.8 1.5V22.5C146.8 23.3284 147.472 24 148.3 24C149.128 24 149.8 23.3284 149.8 22.5V1.5Z" fill="#162E4D" stroke="white"/>
+</g>
+<defs>
+<clipPath id="clip0_0_32">
+<rect width="178" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="168" height="168" viewBox="0 0 168 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Donut" clip-path="url(#clip0_0_21)">
+<path id="Vector" d="M158 84C158 124.869 124.869 158 84 158C43.1309 158 10 124.869 10 84C10 43.1309 43.1309 10 84 10C124.869 10 158 43.1309 158 84Z" stroke-width="20" stroke="#EEF1F5"/>
+<path id="Vector_2" d="M95.25 10.86C108.794 12.9434 121.494 18.7467 131.934 27.6233C142.374 36.4998 150.144 48.1009 154.378 61.1337C158.612 74.1666 159.145 88.1192 155.916 101.437C152.687 114.754 145.823 126.914 136.09 136.56" stroke-width="20" stroke-linecap="round" stroke="#162E4D"/>
+<path id="Vector_3" d="M117.89 149.78C107.459 155.154 95.9001 157.97 84.1665 157.997C72.4329 158.023 60.8612 155.259 50.4063 149.932C39.9513 144.606 30.9129 136.869 24.0369 127.362C17.1609 117.854 12.6443 106.847 10.86 95.25" stroke-width="20" stroke-linecap="round" stroke="#38A5E0"/>
+<path id="Vector_4" d="M10.86 72.75C13.2529 57.1928 20.544 42.8039 31.674 31.674C42.8039 20.544 57.1928 13.2529 72.75 10.86" stroke-width="20" stroke-linecap="round" stroke="#B4D6E4"/>
+</g>
+<defs>
+<clipPath id="clip0_0_21">
+<rect width="168" height="168" fill="white"/>
+</clipPath>
+</defs>
+</svg>
