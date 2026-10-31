@@ -18,7 +18,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { exportCsv, exportExcel, printReport, slugify } from "./export";
+import { exportCsv, exportExcel, printReport, slugify } from "./lib/export";
 import { Button } from "@/components/ui/button";
 import {
   Select,

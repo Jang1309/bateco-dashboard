@@ -15,7 +15,7 @@ type Section = {
   terms: Term[];
 };
 
-// giữ khớp với cách tính trong src/lib/db/budget.ts và src/views/so-sanh-nam/format.ts; chỉ ghi công thức bằng lời, không ghi tên cột DB
+// giữ khớp với cách tính trong src/lib/db/budget.ts và src/views/so-sanh-nam/lib/format.ts; chỉ ghi công thức bằng lời, không ghi tên cột DB
 const SECTIONS: Section[] = [
   {
     id: "du-lieu",

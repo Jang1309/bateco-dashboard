@@ -10,9 +10,9 @@ import {
   TrendChart,
   WinMixChart,
 } from "./components/charts";
-import { pairGroups, seriesGroups, type YearData } from "./components/compare-data";
+import { pairGroups, seriesGroups, type YearData } from "./lib/compare-data";
 import { OwnersCompareTable } from "./components/owners-table";
-import { delta, fmt, yearColor, type Kind } from "./components/format";
+import { delta, fmt, yearColor, type Kind } from "./lib/format";
 import { YearPicker } from "./components/year-picker";
 
 function DeltaBadge({ a, b, kind }: { a: number; b: number; kind: Kind }) {

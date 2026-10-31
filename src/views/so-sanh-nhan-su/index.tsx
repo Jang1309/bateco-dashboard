@@ -5,8 +5,8 @@ import type { Person, PersonKind } from "@/lib/db/budget";
 import { outlineBtn } from "@/components/dashboard/kpi-strip";
 import { YearSelect } from "@/components/dashboard/controls";
 import { GroupCompareChart, WinMixChart } from "@/views/so-sanh-nam/components/charts";
-import { seriesGroups } from "@/views/so-sanh-nam/components/compare-data";
-import { fmt, personColor, type Kind } from "@/views/so-sanh-nam/components/format";
+import { seriesGroups } from "@/views/so-sanh-nam/lib/compare-data";
+import { fmt, personColor, type Kind } from "@/views/so-sanh-nam/lib/format";
 import {
   PeoplePicker,
   type Pick,

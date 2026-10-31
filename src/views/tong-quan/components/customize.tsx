@@ -27,7 +27,7 @@ import {
   saveDashboardPrefs,
   useDashboardPrefs,
   type SectionId,
-} from "./dashboard-prefs";
+} from "../lib/dashboard-prefs";
 import { KpiStrip, outlineBtn } from "@/components/dashboard/kpi-strip";
 import { OwnersTable } from "./owners-table";
 

@@ -30,8 +30,8 @@ import {
   type GroupPair,
   type GroupSeries,
   type YearData,
-} from "./compare-data";
-import { delta, type Kind } from "./format";
+} from "../lib/compare-data";
+import { delta, type Kind } from "../lib/format";
 
 const COLOR_A = "var(--chart-plan)";
 const COLOR_B = "var(--chart-1)";

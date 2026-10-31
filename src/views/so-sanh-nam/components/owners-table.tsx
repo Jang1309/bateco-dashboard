@@ -26,7 +26,7 @@ import { FilterBuilder } from "@/components/filter/filter-builder";
 import { FilterChips } from "@/components/filter/filter-chips";
 import { Panel, ToneBadge } from "@/components/dashboard/panel";
 import { Seg } from "./charts";
-import { delta, yearColor } from "./format";
+import { delta, yearColor } from "../lib/format";
 
 /** Một phụ trách qua các năm; byYear[i] vắng = năm thứ i không có kế hoạch. */
 export type OwnerSeries = (BudgetOwner | undefined)[];

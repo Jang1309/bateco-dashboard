@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "cn";
 import { Spinner } from "@/components/ui/spinner";
-import { yearColor } from "./format";
+import { yearColor } from "../lib/format";
 
 /** Chọn nhiều năm để so sánh (tối thiểu 2, tối đa maxYears); luôn xếp tăng dần, năm đầu là mốc. */
 export function YearPicker({

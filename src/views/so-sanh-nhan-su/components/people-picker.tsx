@@ -6,7 +6,7 @@ import { UsersIcon } from "lucide-react";
 import { cn } from "cn";
 import type { Person, PersonKind } from "@/lib/db/budget";
 import { Spinner } from "@/components/ui/spinner";
-import { personColor } from "@/views/so-sanh-nam/components/format";
+import { personColor } from "@/views/so-sanh-nam/lib/format";
 
 /** Một người đang được so sánh, kèm ô màu cố định của người đó. */
 export type Pick = { slot: number; key: string };
